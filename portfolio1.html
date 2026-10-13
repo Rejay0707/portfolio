@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="keywords" content="Scratch software solutions" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="author" content="Scratch software solutions" />
+
+  <!--====== Title ======-->
+  <title>Scratch software solutions</title>
+
+  <!--====== Favicon Icon ======-->
+  <link rel="shortcut icon" href="assets/images/normal/favicon.png" type="image/png" />
+
+  <!--====== Bootstrap css ======-->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <!--====== icofont Icons css ======-->
+  <link rel="stylesheet" href="assets/fonts/flaticon.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!--====== Slick slider CSS ======-->
+  <link rel="stylesheet" href="assets/css/slick.css" />
+  <!--====== animate CSS ======-->
+  <link rel="stylesheet" href="assets/css/animate.css" />
+
+  <!--====== Default css ======-->
+  <link rel="stylesheet" href="assets/css/default.css" />
+
+  <!--====== Style css ======-->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <link rel="stylesheet" href="css/style2.css" />
+
+  <style>
+    .breadcrumbs_section::before {
+      background-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    #back1 {
+      background: url("assets/images/services/website-maintanance/maintanance-banner.jpg") !important;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      position: relative;
+      padding: 14.5rem;
+      /* height: 613px !important; */
+      background-size: cover !important;
+    }
+
+    @media (max-width:980px) {
+      #back1 {
+        padding: 10rem
+      }
+    }
+
+    @media (max-width:676px) {
+      #back1 {
+        padding: 7rem
+      }
+    }
+
+    #box {
+      position: relative;
+    }
+
+    #box2::before {
+      /* position: absolute;
+            content: "";
+            left: 0 !important;
+            bottom: -30px !important;
+            height: 300px;
+            width: 100%;
+            background: url('/assets/images/normal/background.png') !important;
+            background-repeat: no-repeat !important;
+            z-index: -1; */
+      position: absolute;
+      content: "";
+      left: 0 !important;
+      bottom: -5px;
+      height: 100%;
+      width: 100%;
+      background: url("/assets/images/normal/circle_chooing.svg") no-repeat left bottom !important;
+      z-index: -1;
+    }
+
+    .blog-post-area .blog-card:hover .blog-image img {
+      -webkit-transform: scale(1.2) !important;
+      -moz-transform: scale(1.2) !important;
+      -ms-transform: scale(1.2) !important;
+      -o-transform: scale(1.2) !important;
+      transform: scale(1.2) !important;
+      -webkit-transition: all 0.5s ease-out 0s;
+      -moz-transition: all 0.5s ease-out 0s;
+      -ms-transition: all 0.5s ease-out 0s;
+      -o-transition: all 0.5s ease-out 0s;
+      transition: all 0.5s ease-out 0s;
+    }
+
+    .blog-post-area .blog-card .blog-content:hover {
+      /* background-color: rgba(23, 85, 255, 0.568); */
+      background-color: #5f7abe;
+
+      .blog-title,
+      .blog-para {
+        color: white;
+      }
+    }
+
+    .blog-post-area .blog-card {
+      padding: 0px !important;
+    }
+
+    .header-menu-area.sticky {
+      background-color: white !important;
+      padding: 7px 0 !important;
+    }
+
+    #portfolio__Sec_2 {
+      margin-top: 5rem !important;
+    }
+
+    .Heading__space {
+      margin-bottom: 2rem;
+    }
+
+    /* ===== Video hover + equal card sizes ===== */
+
+    /* Same shape for every portfolio card (matches 1.jpg: about 392 x 380) */
+    .single-case-studies figure {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 392 / 380;
+    }
+
+    .single-case-studies figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+    }
+
+    /* Video sits on top of the image and fades in on hover */
+    .video-hover .hover-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .video-hover.playing .hover-video { opacity: 1; }
+
+    /* Wide card for Native Crunch (static row, second card) */
+.wide-card .single-case-studies figure {
+  aspect-ratio: 1918 / 944;
+}
+
+.wide-card .single-case-studies figure img,
+.wide-card .video-hover .hover-video {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Video popup */
+.video-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 99999;
+}
+
+.video-modal.open { display: flex; }
+
+.video-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.video-modal video {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+  background: #000;
+  border-radius: 8px;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 38px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Static websites carousel */
+.static-carousel { position: relative; }
+
+.sc-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.sc-item {
+  flex: 0 0 26%;
+  scroll-snap-align: start;
+}
+.sc-item.wide-card { flex: 0 0 52%; }
+
+
+.sc-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 5;
+}
+.sc-btn:hover { background: #5f7abe; }
+.sc-prev { left: -10px; }
+.sc-next { right: -10px; }
+
+@media (max-width: 991px) {
+  .sc-item,
+  .sc-item.wide-card { flex: 0 0 80%; }
+}
+  </style>
+</head>
+
+<body>
+  <!--====== PRELOADER PART START ======-->
+
+  <div class="gridtemplate-loader">
+    <div class="preloader">
+      <div class="spinner"></div>
+      <img class="preload-logo" src="assets/images/normal/favicon.png" />
+    </div>
+  </div>
+
+  <!--====== PRELOADER PART ENDS ======-->
+
+  <!--====== HEADER PART START ======-->
+
+  <header class="header-area">
+    <div class="header-menu-area d-none d-lg-block"
+      style="background-color: rgb(0 0 0 / 50%); padding: 0px 0px 22px 0px">
+      <div class="header-main-menu">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-2">
+              <div class="menu-logo">
+                <a class="logo" href="index.html">
+                  <img src="assets/images/normal/162x55.png" class="white-logo" alt="Logo">
+                  <img src="assets/images/normal/122.jpg" class="light-logo" alt="Logo">
+
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-8 d-flex justify-content-center">
+              <div class="navbar-menu">
+                <ul class="">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About Us</a>
+                  
+                   <ul class="sub-menu">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="our_team.html">Our Team</a></li>
+                                          <li><a href="CEO_Message.html">CEO Message</a></li>
+                                        </ul>
+                  
+                  
+                  
+                  
+                  </li>
+                  <li><a href="services.html">Services <i class="flaticon-add-1"></i></a>
+                    <ul class="sub-menu">
+                         <li><a href="services.html">Services</a></li>
+                      <li><a href="Web_Design_And_Web_Development.html">Web Design And Web
+                          Development</a></li>
+                      <li><a href="App_Development.html">App Development</a></li>
+                      <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting
+                          Support</a></li>
+                      <li><a href="Enterprise_Software_Development.html">Enterprise Software
+                          Development</a></li>
+                      <li><a href="Creative_Services.html">Creative Services</a></li>
+                      <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+</nav>
+                    </ul>
+                  </li>
+                  <li><a href="blog_page.html">Events</a></li>
+                  <li><a href="potfolio.html" class="active">Portfolio</a></li>
+
+                  <li><a href="contact.php">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-2 text-lg-end">
+              <div class="button">
+                <a class="btn main-btn mouse-hover" href="contact.php#contact" style="padding: 17px 0px 0px 0px">Get a
+                  Quote<span></span></a>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+    </div>
+    <!-- header menu area -->
+
+    <div class="header-mobile-menu d-lg-none">
+      <div class="container">
+        <div class="mobile-menu d-flex justify-content-between align-items-center">
+          <div class="menu-bar">
+            <a class="mobile-menu-open" href="javascript:void(0)"><i class="flaticon-menu"></i></a>
+          </div>
+          <div class="mobile-logo">
+            <a href="index.html"><img src="assets/images/normal/122.jpg" class="light-logo" alt="Logo" /></a>
+          </div>
+          <!-- mobile logo -->
+        </div>
+        <!-- mobile menu -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- header mobile menu -->
+
+    <div id="home" class="header_hero">
+      <div class="container-fluid px-0"></div>
+      <!-- container -->
+    </div>
+    <!-- header hero -->
+  </header>
+
+  <!--====== HEADER PART ENDS ======-->
+
+  <!--====== BREADCRUMB PART START ======-->
+  <section class="breadcrumbs_section" id="back1">
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-6 col-md-6 col-12">
+            <div class="breadcrumbs-content left">
+              <pre></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--====== BREADCRUMB PART END ======-->
+
+  <!--====== OFFCANVAS MOBILE MENU PART START ======-->
+
+  <div class="offcanvas-menu-wrapper mobile-menu-style2">
+    <div class="offcanvas-menu">
+      <a class="close-mobile-menu" href="javascript:void(0)"><i class="flaticon-x-mark"></i></a>
+
+      <div class="mobile-menu pt-30">
+     <nav>
+                    <ul>
+
+                        <li><a href="index.html">Home</a></li>
+
+                       <li>
+                      <li class="menu-item-has-children"><a href="about.html" class="active">About Us</a>
+
+                      <ul class="sub-menu">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="our_team.html">Our Team</a></li>
+                        <li><a href="CEO_Message.html">CEO Message</a></li>
+                      </ul>
+                    </li>
+
+                        <li class="menu-item-has-children"><a href="services.html">Services</a>
+                            <ul class="sub-menu">
+                                <li><a href="Web_Design_And_Web_Development.html">Web Design And Web Development</a>
+                                </li>
+                                <li><a href="App_Development.html">App Development</a></li>
+                                <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting Support</a>
+                                </li>
+                                <li><a href="Enterprise_Software_Development.html">Enterprise Software Development</a>
+                                </li>
+                                <li><a href="Creative_Services.html">Creative Services</a></li>
+                                <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li><a href="blog_page.html">Events</a></li>
+                        <li><a href="potfolio.html">Portfolio</a></li>
+                        <li><a href="contact.php">Contact</a></li>
+                    </ul>
+                </nav>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </div>
+
+  <!--====== OFFCANVAS MOBILE MENU PART START ======-->
+
+  <!--====== WHY CHOOSING PART START ======-->
+
+  <!--====== CUSTOMER SERVICES SART PART START ======-->
+
+  <section class="recent_case_area">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-title text-center">
+            <br /><br />
+            <h3 class="title">Our Portfolio</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+  <h2 class="Heading__space">Static Websites</h2>
+
+  <div class="col-12">
+    <div class="static-carousel">
+      <button class="sc-btn sc-prev" type="button" aria-label="Previous">&#10094;</button>
+
+      <div class="sc-track">
+
+        <!-- Card 1 -->
+        <div class="sc-item">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/1.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: TUV -->
+        <div class="sc-item wide-card">
+          <div class="single-case-studies text-center">
+            <a href="#" class="video-hover" data-video="assets/videos/static/TUV.mp4">
+              <figure>
+                <img class="img-fluid" src="assets/images/static/TUV.png" alt="Technical United Vision" />
+                <video class="hover-video" muted loop playsinline preload="metadata"
+                       poster="assets/images/static/TUV.png">
+                  <source src="assets/videos/static/TUV.mp4" type="video/mp4" />
+                </video>
+                <figcaption>
+                  <div class="hover-info">
+                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: MIQYASS -->
+        <div class="sc-item wide-card">
+          <div class="single-case-studies text-center">
+            <a href="#" class="video-hover" data-video="assets/videos/static/MIQYASS.mp4">
+              <figure>
+                <img class="img-fluid" src="assets/images/static/MIQYASS.png" alt="MIQYASS" />
+                <video class="hover-video" muted loop playsinline preload="metadata"
+                       poster="assets/images/static/MIQYASS.png">
+                  <source src="assets/videos/static/MIQYASS.mp4" type="video/mp4" />
+                </video>
+                <figcaption>
+                  <div class="hover-info">
+                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+
+      <button class="sc-btn sc-next" type="button" aria-label="Next">&#10095;</button>
+    </div>
+  </div>
+</div>
+      
+      <div class="row" id="portfolio__Sec_2">
+        <h2 class="Heading__space">E-Commerce Websites</h2>
+        <div class="col-lg-8 col-md-12 col-12 wide-card" style="padding: 0 1.5rem;">
+  <div class="single-case-studies text-center">
+    <a href="#" class="video-hover" data-video="assets/videos/native-crunch-1.mp4">
+      <figure>
+        <img class="img-fluid" src="assets/native-crunch.png" alt="Native Crunch" />
+        <video class="hover-video" muted loop playsinline preload="metadata"
+               poster="assets/images/case/2.jpg">
+          <source src="assets/videos/native-crunch-1.mp4" type="video/mp4" />
+        </video>
+        <figcaption>
+          <div class="hover-info">
+            <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+          </div>
+        </figcaption>
+      </figure>
+    </a>
+  </div>
+</div>
+        
+        <!-- <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/5.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <h5>CRM Portal</h5>
+                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div> -->
+        <!-- <div class="col-lg-4 col-md-6 col-12">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/6.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <h5>Portfolio 3</h5>
+                    <span>Template</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div> -->
+      </div>
+
+                  <div class="row" style="margin-top: 5rem;">
+        <h2 class="Heading__space">Dynamic Websites</h2>
+
+        <div class="col-12">
+          <div class="static-carousel">
+            <button class="sc-btn sc-prev" type="button" aria-label="Previous">&#10094;</button>
+
+            <div class="sc-track">
+
+              <!-- ISHA -->
+              <div class="sc-item wide-card">
+                <div class="single-case-studies text-center">
+                  <a href="#" class="video-hover" data-video="assets/videos/static/ISHA.mp4">
+                    <figure>
+                      <img class="img-fluid" src="assets/images/static/ISHA.png" alt="ISHA" />
+                      <video class="hover-video" muted loop playsinline preload="metadata"
+                             poster="assets/images/static/ISHA.png">
+                        <source src="assets/videos/static/ISHA.mp4" type="video/mp4" />
+                      </video>
+                      <figcaption>
+                        <div class="hover-info">
+                          <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Equipride -->
+              <div class="sc-item wide-card">
+                <div class="single-case-studies text-center">
+                  <a href="#" class="video-hover" data-video="assets/videos/dynamic/Equipride.mp4">
+                    <figure>
+                      <img class="img-fluid" src="assets/images/dynamic/Equipride.png" alt="Equipride" />
+                      <video class="hover-video" muted loop playsinline preload="metadata"
+                             poster="assets/images/dynamic/Equipride.png">
+                        <source src="assets/videos/dynamic/Equipride.mp4" type="video/mp4" />
+                      </video>
+                      <figcaption>
+                        <div class="hover-info">
+                          <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Add more .sc-item blocks here; the row scrolls automatically -->
+
+            </div>
+
+            <button class="sc-btn sc-next" type="button" aria-label="Next">&#10095;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="portfolio__Sec_2">
+        <h2 class="Heading__space"> CRM Web Portal</h2>
+        <!-- <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/3.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <h5>Dynamic Website</h5>
+                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/4.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <h5>Dynamic Website</h5>
+                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div> -->
+        <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/5.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+
+                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+        <!-- <div class="col-lg-4 col-md-6 col-12">
+          <div class="single-case-studies text-center">
+            <a href="#">
+              <figure>
+                <img class="img-fluid" src="assets/images/case/6.jpg" />
+                <figcaption>
+                  <div class="hover-info">
+                    <h5>Portfolio 3</h5>
+                    <span>Template</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!--====== CUSTOMER SERVICES SART PART ENDS ======-->
+
+  <!--====== FOOTER PART START ======-->
+
+  <footer class="footer-area">
+    <div class="footer-widget pt-100 pb-80">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="footer-address pt-35">
+              <ul>
+                <li>
+                  <div class="footer-logo">
+                    <img src="assets/images/normal/162x55.png" class="img-fluid" alt="Logo" style="width: 70%" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- footer address -->
+          </div>
+
+          <div class="col-lg-2 col-md-6 col-sm-6">
+            <div class="footer-link pt-35">
+              <ul>
+                <li>
+                  <a href="index.html"><i class="icofont-rounded-right"></i>Home</a>
+                </li>
+                <li>
+                  <a href="about.html"><i class="icofont-rounded-right"></i>About Us</a>
+                </li>
+                <li>
+                  <a href="services.html"><i class="icofont-rounded-right"></i>Services</a>
+                </li>
+                <li>
+                  <a href="potfolio.html"><i class="icofont-rounded-right"></i>Portfolio</a>
+                </li>
+                <li>
+                  <a href="contact.php"><i class="icofont-rounded-right"></i>Contact</a>
+                </li>
+              </ul>
+            </div>
+            <!-- footer link -->
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-instagram pt-35">
+              <div class="footer-address pt-35">
+                <ul>
+                  <li>
+                    <div class="single-address py-2 d-flex">
+                      <div class="address-icon">
+                        <i class="flaticon-phone-call"></i>
+                      </div>
+                      <div class="address-content media-body">
+                        <p class="text">+91 9042644069</p>
+                      </div>
+                    </div>
+                    <!-- single address -->
+                  </li>
+                  <li>
+                    <div class="single-address d-flex">
+                      <div class="address-icon">
+                        <i class="flaticon-placeholder"></i>
+                      </div>
+                      <div class="address-content media-body">
+                        <p class="text">Ettani</p>
+                        <p class="text">Karungal, 629157</p>
+                        <p class="text">kanyakumari, Tamilnadu</p>
+                      </div>
+                    </div>
+                    <!-- single address -->
+                  </li>
+                  <li>
+                    <div class="single-address d-flex">
+                      <div class="address-icon">
+                        <i class="flaticon-email"></i>
+                      </div>
+                      <div class="address-content media-body">
+                        <p class="text">info@scratchsoftwaresolutions.com</p>
+                      </div>
+                    </div>
+                    <!-- single address -->
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- footer Instagram Feeds
+ -->
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-link pt-35">
+              <div class="email-sub-content pt-20 pb-50">
+                <p>
+                  Contact us today to embark on an exciting journey of digital
+                  transformation. to life
+                </p>
+              </div>
+
+              <div class="social-icons">
+                <ul>
+                  <li style="display: inline">
+                    <a href="https://www.facebook.com/people/Scratch-Software-Solutions/100094091524895/?mibextid=ZbWKwL"
+                      style="padding: 15px !important" target="_blank"><i
+                        class="flaticon-facebook-circular-logo"></i></a>
+                  </li>
+                  <li style="display: inline">
+                    <a href="https://instagram.com/scratchsoftwaresolutions?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D"
+                      style="padding: 15px !important" target="_blank"><i class="flaticon-instagram"></i></a>
+                  </li>
+                  <li style="display: inline">
+                    <a href="#" style="padding: 15px !important" margin-bottom="10px" target="_blank"><i
+                        class="fa fa-linkedin-square"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- footer link -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- footer widget -->
+
+    <div class="footer-copyright pt-10 pb-20">
+      <div class="container">
+        <div class="copyright text-center pt-10">
+          <p class="pt-2 text">
+            All copyrights reserved © 2023 - Designed & Developed by
+            <a href="https://scratchsoftwaresolutions.com/">Scratch Software Solutions</a>
+          </p>
+        </div>
+        <!-- copyright -->
+        <div class="footer-bottom text-center pt-15">
+          <!-- payment -->
+        </div>
+        <!-- copyright payment -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- footer copyright -->
+  </footer>
+
+  <!--====== FOOTER PART ENDS ======-->
+
+  <!--====== BACK TOP TOP PART START ======-->
+
+  <a href="#" class="back-to-top back-blue"><i class="flaticon-up-arrow"></i></a>
+
+  <!--====== BACK TOP TOP PART ENDS ======-->
+
+  <!-- Video popup -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-box">
+    <button class="video-modal-close" id="videoModalClose" aria-label="Close">&times;</button>
+    <video id="modalVideo" controls playsinline></video>
+  </div>
+</div>
+
+  <!--====== jquery js ======-->
+  <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+
+  <!--====== Bootstrap js ======-->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+
+  <!--====== Ajax Contact js ======-->
+  <script src="assets/js/ajax-contact.js"></script>
+
+  <!--====== wow.min js ======-->
+  <script src="assets/js/wow.min.js"></script>
+
+  <!--====== Main js ======-->
+  <script src="assets/js/main.js"></script>
+  <script type="text/javascript">
+    // preloader
+    $(window).on("load", function (event) {
+      $(".gridtemplate-loader").delay(500).fadeOut(500);
+    });
+  </script>
+  <script>
+  document.querySelectorAll('.video-hover').forEach(function (card) {
+    var video = card.querySelector('.hover-video');
+
+    card.addEventListener('mouseenter', function () {
+      card.classList.add('playing');
+      var p = video.play();
+      if (p !== undefined) p.catch(function () {});
+    });
+
+    card.addEventListener('mouseleave', function () {
+      card.classList.remove('playing');
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.hover-video').forEach(function (v) {
+      v.preload = 'auto';
+      v.load();
+    });
+  });
+</script>
+
+<script>
+  (function () {
+    var modal = document.getElementById('videoModal');
+    var modalVideo = document.getElementById('modalVideo');
+
+    document.querySelectorAll('.video-hover').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        e.preventDefault();                       // stops the jump to top
+        modalVideo.src = card.getAttribute('data-video');
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';  // page doesn't scroll behind
+        var p = modalVideo.play();
+        if (p !== undefined) p.catch(function () {});
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modalVideo.pause();
+      modalVideo.removeAttribute('src');
+      modalVideo.load();
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('videoModalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();       // click on dark area closes
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  })();
+</script>
+
+<script>
+  document.querySelectorAll('.static-carousel').forEach(function (carousel) {
+    var track = carousel.querySelector('.sc-track');
+    var prev = carousel.querySelector('.sc-prev');
+    var next = carousel.querySelector('.sc-next');
+
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -track.clientWidth * 0.7, behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      track.scrollBy({ left: track.clientWidth * 0.7, behavior: 'smooth' });
+    });
+
+    // Show arrows only when the cards overflow the track
+    function updateArrows() {
+      var needsScroll = track.scrollWidth > track.clientWidth + 1;
+      prev.style.display = needsScroll ? '' : 'none';
+      next.style.display = needsScroll ? '' : 'none';
+    }
+
+    updateArrows();
+    window.addEventListener('resize', updateArrows);
+    window.addEventListener('load', updateArrows);
+  });
+</script>
+</body>
+
+</html>
