@@ -177,10 +177,23 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
 @media(hover:hover) and (pointer:fine){.js .cur{opacity:1}}
 @media(max-width:1000px){
   .burger{display:block;position:relative;z-index:130}.cta{display:none}.m-only{display:block}
-  .menu{position:fixed;inset:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:100px 24px 30px;overflow-y:auto;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
-  .menu-open .menu{transform:none}
-  .menu>li>a{font-size:18px;border-radius:12px}
-  .sub{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:0 0 8px 14px;min-width:0}
+  .menu-open .logo{position:relative;z-index:130}
+  body.menu-open{overflow:hidden}
+  .menu{position:fixed;inset:0;z-index:125;background:#fff;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:96px 24px calc(28px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
+  .menu-open .menu{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .menu>li{width:100%;border-bottom:1px solid var(--line);opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}
+  .menu-open .menu>li{opacity:1;transform:none}
+  .menu-open .menu>li:nth-child(1){transition-delay:.12s}.menu-open .menu>li:nth-child(2){transition-delay:.17s}.menu-open .menu>li:nth-child(3){transition-delay:.22s}.menu-open .menu>li:nth-child(4){transition-delay:.27s}.menu-open .menu>li:nth-child(5){transition-delay:.32s}.menu-open .menu>li:nth-child(6){transition-delay:.37s}.menu-open .menu>li:nth-child(7){transition-delay:.42s}
+  .menu>li:not(.m-only)>a{display:flex;align-items:center;justify-content:space-between;padding:17px 4px;font-size:19px;font-weight:700;border-radius:0}
+  .menu>li:not(.m-only)>a:hover,.menu>li:not(.m-only)>a.act{background:none;color:var(--b)}
+  .has>a::after{content:"\f107";font-family:FontAwesome;font-weight:400;font-size:22px;color:var(--b);transition:transform .3s}
+  .has.open>a::after{transform:rotate(180deg)}
+  .sub{position:static;display:block;min-width:0;max-height:0;overflow:hidden;opacity:1;visibility:visible;transform:none;background:none;border:0;border-radius:0;box-shadow:none;padding:0 0 0 6px;transition:max-height .45s ease}
+  .has.open .sub{max-height:640px;padding-bottom:12px}
+  .sub a{padding:12px 14px;font-size:16px;font-weight:500;color:var(--mut);border-left:2px solid var(--line);border-radius:0}
+  .sub a:hover{background:none;color:var(--b);border-left-color:var(--b)}
+  .menu>li.m-only{border:0;margin-top:auto;padding-top:26px}
+  .menu .m-only .btn{display:flex;width:100%;justify-content:center;padding:16px 24px;font-size:16px;color:#fff}
   .hg{grid-template-columns:1fr;gap:10px}.hero{padding-top:110px}
   .c0{transform:translate(-50%,-50%) translateX(-8%)}
   .cp{transform:translate(-50%,-50%) translateX(14%) translateZ(-200px) rotateY(-24deg)}
@@ -489,9 +502,18 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
   addEventListener('load',function(){setTimeout(hide,400)});setTimeout(hide,3000);
 
   /* mobile menu */
-  var bg=$('.burger');
-  bg.onclick=function(){var o=document.body.classList.toggle('menu-open');bg.setAttribute('aria-expanded',o)};
-  $$('.menu a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('menu-open')})});
+  var bg=$('.burger'),bi=bg.querySelector('i');
+  function setMenu(o){
+    document.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o);bi.className=o?'fa fa-times':'fa fa-bars';
+    if(!o)$$('.has.open').forEach(function(h){h.classList.remove('open')});
+  }
+  bg.onclick=function(){setMenu(!document.body.classList.contains('menu-open'))};
+  addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  addEventListener('resize',function(){if(innerWidth>1000)setMenu(false)});
+  /* tap About Us / Services to open or close its list */
+  $$('.has>a').forEach(function(a){a.addEventListener('click',function(e){if(innerWidth<=1000){e.preventDefault();a.parentNode.classList.toggle('open')}})});
+  /* any other link closes the menu */
+  $$('.menu a').forEach(function(a){a.addEventListener('click',function(){if(!a.parentNode.classList.contains('has'))setMenu(false)})});
 
   /* ---------- hero coverflow + text ---------- */
   var cfi=$$('.cfi'),txs=$$('.tx-s'),dots=$$('.hc .dot'),pb=$('#pbar'),cur=0,tm;
@@ -615,20 +637,70 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
     var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,100);cam.position.z=14;
     sc.add(new THREE.AmbientLight(0xffffff,.75));
     var dl=new THREE.DirectionalLight(0xffffff,.95);dl.position.set(5,8,10);sc.add(dl);
+    var dl2=new THREE.DirectionalLight(0x9db8ff,.5);dl2.position.set(-6,-4,6);sc.add(dl2);
     var geos=[new THREE.IcosahedronGeometry(1,0),new THREE.OctahedronGeometry(1,0),new THREE.TorusGeometry(.8,.3,12,32),new THREE.BoxGeometry(1.3,1.3,1.3),new THREE.TetrahedronGeometry(1.2,0),new THREE.TorusKnotGeometry(.6,.2,64,10)];
     var cols=[0x0741AE,0x1d62e8,0x7aa5ff];
-    var small=innerWidth<700,N=small?2:3,stp=4.2,vh=2*14*Math.tan(22.5*Math.PI/180),items=[],grp=new THREE.Group();sc.add(grp);
+    var narrow=innerWidth<1100,small=innerWidth<700,N=small?2:3,stp=4.2,vh=2*14*Math.tan(22.5*Math.PI/180),items=[],grp=new THREE.Group();sc.add(grp);
+    var OP=narrow?.42:.55;
     function halfW(){return vh*(innerWidth/innerHeight)/2}
+    function mat(c){return new THREE.MeshPhongMaterial({color:c,shininess:25,transparent:true,opacity:OP})}
+    function flat(c){return new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:OP})}
+    function bx(w,h,d,m,x,y,z,rz){var o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x||0,y||0,z||0);o.rotation.z=rz||0;return o}
+    function pl(w,h,m,x,y,z){var o=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);o.position.set(x,y,z||.11);return o}
+
+    /* 1. code brackets  </>  (web design and development) */
+    function brackets(){
+      var g=new THREE.Group(),b=mat(0x9db8ee),l=mat(0xc4d5f6);
+      g.add(bx(1.2,.3,.3,b,-1.1,.45,0,.845),bx(1.2,.3,.3,b,-1.1,-.45,0,-.845),
+            bx(1.2,.3,.3,b,1.1,.45,0,-.845),bx(1.2,.3,.3,b,1.1,-.45,0,.845),
+            bx(2,.26,.26,l,0,0,0,1.25));
+      return g;
+    }
+    /* 2. smartphone with a little app screen  (app development) */
+    function phone(){
+      var g=new THREE.Group();
+      g.add(bx(1.2,2.3,.18,mat(0x9db8ee)));
+      g.add(pl(1.02,2.04,flat(0xf3f7ff),0,0,.095));
+      g.add(pl(.8,.14,flat(0xb7cbf3),0,.82));
+      g.add(pl(.9,.62,flat(0xe0eaff),0,.3));
+      g.add(pl(.9,.12,flat(0xe0eaff),0,-.2));
+      g.add(pl(.6,.12,flat(0xe0eaff),-.15,-.42));
+      g.add(pl(.42,.3,flat(0x9db8ee),-.24,-.78));
+      g.add(pl(.42,.3,flat(0xc4d5f6),.24,-.78));
+      g.add(pl(.36,.07,mat(0x7f9bd8),0,.97,.12));
+      return g;
+    }
+    /* 3. server / database stack with status lights  (hosting and maintenance) */
+    function server(){
+      var g=new THREE.Group(),cs=[0x9db8ee,0xb7cbf3,0x9db8ee];
+      for(var i=0;i<3;i++){
+        var y=(1-i)*.78,d=new THREE.Mesh(new THREE.CylinderGeometry(1.05,1.05,.5,40),mat(cs[i]));d.position.y=y;g.add(d);
+        var ring=new THREE.Mesh(new THREE.TorusGeometry(1.05,.035,8,48),flat(0xe8f0ff));ring.rotation.x=Math.PI/2;ring.position.y=y+.25;g.add(ring);
+        for(var k=0;k<3;k++){
+          var an=.3+k*.2,led=new THREE.Mesh(new THREE.SphereGeometry(.07,12,12),flat(k===0?0x6f93dc:0xe8f0ff));
+          led.position.set(Math.cos(an)*1.06,y,Math.sin(an)*1.06);g.add(led);
+        }
+      }
+      g.rotation.x=.35;return g;
+    }
+    function tickObj(m,boost){
+      var u=m.userData;u.ph+=.008+boost*.4;var s=Math.sin(u.ph);
+      if(u.kind===0){m.rotation.y=s*.55;m.rotation.x=Math.sin(u.ph*.7)*.15}
+      else if(u.kind===1){m.rotation.y=-.45+s*.45;m.rotation.z=-.16+Math.sin(u.ph*.6)*.05}
+      else{m.rotation.y+=.004+boost*.5}
+      m.position.y=u.by+Math.sin(u.ph*1.3)*.14;
+    }
     var specs=[
-      {g:geos[0],solid:1,col:0x0741AE,side:-1,f:.9,y:1.2,s:1.15},
-      {g:geos[2],solid:1,col:0x1d62e8,side:1,f:.92,y:-3.6,s:1.1},
-      {g:geos[5],solid:0,col:0x0741AE,side:-1,f:.86,y:-8,s:1.3}
+      {b:brackets,side:-1,f:.93,y:1,s:.66},
+      {b:phone,side:1,f:.9,y:-3.8,s:.92},
+      {b:server,side:-1,f:.86,y:-8.2,s:.84}
     ];
     for(var i=0;i<N;i++){
-      var sp=specs[i],mat=sp.solid?new THREE.MeshPhongMaterial({color:sp.col,shininess:90,flatShading:true,transparent:true,opacity:small?.6:.88}):new THREE.MeshBasicMaterial({color:sp.col,wireframe:true,transparent:true,opacity:.4});
-      var m=new THREE.Mesh(sp.g,mat);
-      m.scale.setScalar(sp.s*(small?.6:1));m.userData={side:sp.side,f:sp.f,sp:[.0035,.005]};
-      m.position.set(sp.side*halfW()*sp.f,sp.y,-1);m.rotation.set(.6+i,.4*i,0);grp.add(m);items.push(m);
+      var sp=specs[i],m=sp.b();
+      m.scale.setScalar(sp.s*(narrow?.7:1)*(small?.8:1));
+      m.userData={side:sp.side,f:sp.f,ph:Math.random()*6,by:sp.y,kind:i};
+      m.position.set(sp.side*halfW()*sp.f,sp.y,-1);
+      grp.add(m);items.push(m);
     }
     var camY=0,lastS=scrollY,boost=0,run=true;
     function resize(){ren.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();items.forEach(function(m){m.position.x=m.userData.side*halfW()*m.userData.f})}
@@ -640,7 +712,7 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
       boost+=(Math.abs(scrollY-lastS)*.0007-boost)*.1;lastS=scrollY;
       camY+=((-p*(N-1)*stp*.9)-camY)*.07;cam.position.y=camY;
       grp.rotation.y+=((mx*.25)-grp.rotation.y)*.05;grp.rotation.x+=((my*.12)-grp.rotation.x)*.05;
-      items.forEach(function(m){m.rotation.x+=m.userData.sp[0]+boost;m.rotation.y+=m.userData.sp[1]+boost});
+      items.forEach(function(m){tickObj(m,boost)});
       ren.render(sc,cam);
     }
     frame();
