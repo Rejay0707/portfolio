@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="Scratch software solutions">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Scratch software solutions">
+
+    <!--====== Title ======-->
+    <title>Scratch software solutions</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/normal/favicon.png" type="image/png">
+
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--====== icofont Icons css ======-->
+    <link rel="stylesheet" href="assets/fonts/flaticon.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--====== Slick slider CSS ======-->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <!--====== animate CSS ======-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="css/style2.css">
+
+
+    <style>
+        .md1-c {
+            display: flex;
+            align-items: center;
+            /* Vertically center content */
+            padding: 20px;
+        }
+
+        .md1-i {
+            flex: 1;
+            /* Take up 1/3 of the available space */
+            padding: 20px;
+        }
+
+        .image-container img {
+            /* position: absolute; */
+            max-width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .content-container {
+            flex: 2;
+            /* Take up 2/3 of the available space */
+            /* padding: 20px; */
+            /* background-color: #f2f2f2; */
+            text-align: justify;
+        }
+
+        .md2-c {
+            display: flex;
+            align-items: center;
+            /* Vertically center content */
+            flex-direction: row-reverse;
+            /* padding: 20px; */
+        }
+
+        .md2-i {
+
+            flex: 1;
+            /* Take up 1/3 of the available space */
+            /* padding: 20px; */
+
+        }
+
+        .image-container img {
+            width: 100%;
+            /* height: 100%; */
+            height: auto;
+            display: block;
+            transition: transform 1s ease;
+        }
+
+        .md1-i:hover,
+        .md2-i:hover {
+            transform: scale(1.2);
+            transition: transform 1.5s ease;
+
+
+        }
+
+        .content-container {
+            flex: 2;
+            /* Take up 2/3 of the available space */
+            padding: 20px;
+            /* background-color: #f2f2f2; */
+            position: relative;
+            padding: 32px;
+        }
+
+        .breadcrumbs_section {
+            background: url("assets/images/normal/Service-banner.jpg") !important;
+            background-size: cover !important;
+            background-position: center;
+            position: relative;
+            display: none;
+
+
+        }
+
+        .breadcrumbs_section::before {
+            background-color: rgba(255, 255, 255, 0) !important;
+        }
+
+        .video-background {
+            /* position: fixed; */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* overflow: hidden; */
+        }
+
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .header-menu-area.sticky {
+            background-color: white !important;
+            padding: 7px 0 !important;
+        }
+
+        #ser1 {
+            background-color: white !important;
+        }
+
+        .blog-post-area {
+            background: white !important;
+            padding-top: 0px;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column !important;
+            }
+
+            .image-container {
+                margin: 0 !important;
+            }
+
+            .content-container {
+                margin-top: 20px !important;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="gridtemplate-loader">
+        <div class="preloader">
+            <div class="spinner"></div>
+            <img class="preload-logo" src="assets/images/normal/favicon.png">
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+
+    <!--====== HEADER PART START ======-->
+
+
+
+
+    <header class="header-area">
+        <div class="header-menu-area d-none d-lg-block" style="background-color: rgb(0 0 0 / 50%);
+        padding: 0px 0px 22px 0px;">
+            <div class="header-main-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="menu-logo">
+                                <a class="logo" href="index.html">
+                                    <img src="assets/images/normal/162x55.png" class="white-logo" alt="Logo">
+                                    <img src="assets/images/normal/122.jpg" class="light-logo" alt="Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 d-flex justify-content-center">
+                            <div class="navbar-menu">
+                                <ul class="">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html" class="active">About Us</a>
+                                    
+                                    
+                                    
+                                    
+                                    <ul class="sub-menu">
+                                            <li><a href="services.html">About Us</a></li>
+                                            <li><a href="Web_Design_And_Web_Development.html">Our Team</a></li>
+                                            <li><a href="CEO_Message.html">CEO Message</a></li>
+                                        </ul>
+                                        
+                                    </li>
+                                    
+                                    <li><a href="services.html" class="active">Services <i
+                                                class="flaticon-add-1"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="Web_Design_And_Web_Development.html">Web Design And Web
+                                                    Development</a></li>
+                                            <li><a href="App_Development.html">App Development</a></li>
+                                            <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting
+                                                    Support</a></li>
+                                            <li><a href="Enterprise_Software_Development.html">Enterprise Software
+                                                    Development</a></li>
+                                            <li><a href="Creative_Services.html">Creative Services</a></li>
+                                            <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="blog_page.html">Events</a></li>
+                                    <li><a href="potfolio.html">Portfolio</a></li>
+
+
+                                    <li><a href="contact.php">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 text-lg-end">
+                            <div class="button">
+                                <a class="btn main-btn mouse-hover" href="contact.php#contact"
+                                    style=" padding: 17px 0px 0px 0px">Get a Quote<span></span></a>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- container -->
+
+            </div>
+        </div> <!-- header menu area -->
+
+        <div class="header-mobile-menu d-lg-none">
+            <div class="container">
+                <div class="mobile-menu d-flex justify-content-between align-items-center">
+                    <div class="menu-bar">
+                        <a class="mobile-menu-open" href="javascript:void(0)"><i class="flaticon-menu"></i></a>
+                    </div>
+                    <div class="mobile-logo">
+                        <a href="index.html"><img src="assets/images/normal/162x55.png" class="light-logo"
+                                alt="Logo"></a>
+                    </div> <!-- mobile logo -->
+
+                </div> <!-- mobile menu -->
+            </div> <!-- container -->
+        </div> <!-- header mobile menu -->
+
+        <div id="home" class="header_hero">
+            <div class="container-fluid px-0">
+
+            </div> <!-- container -->
+        </div> <!-- header hero -->
+
+        <div class="video-background">
+            <video autoplay loop muted>
+                <source src="assets/images/video/Sequence 01.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="content">
+            </div>
+        </div>
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+
+
+
+    <!--====== BREADCRUMB PART START ======-->
+    <section class="breadcrumbs_section">
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="breadcrumbs-content left">
+                            <h1 class="page-title">Services</h1>
+                            <p>Some text</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!--====== BREADCRUMB PART END ======-->
+
+
+    <!--====== OFFCANVAS MOBILE MENU PART START ======-->
+
+    <div class="offcanvas-menu-wrapper mobile-menu-style2">
+        <div class="offcanvas-menu">
+            <a class="close-mobile-menu" href="javascript:void(0)"><i class="flaticon-x-mark"></i></a>
+
+            <div class="mobile-menu pt-30">
+                 <nav>
+                    <ul>
+
+                        <li><a href="index.html">Home</a></li>
+
+                       <li>
+                      <li class="menu-item-has-children"><a href="about.html" class="active">About Us</a>
+
+                      <ul class="sub-menu">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="our_team.html">Our Team</a></li>
+                        <li><a href="CEO_Message.html">CEO Message</a></li>
+                      </ul>
+                    </li>
+
+                        <li class="menu-item-has-children"><a href="services.html">Services</a>
+                            <ul class="sub-menu">
+                                <li><a href="Web_Design_And_Web_Development.html">Web Design And Web Development</a>
+                                </li>
+                                <li><a href="App_Development.html">App Development</a></li>
+                                <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting Support</a>
+                                </li>
+                                <li><a href="Enterprise_Software_Development.html">Enterprise Software Development</a>
+                                </li>
+                                <li><a href="Creative_Services.html">Creative Services</a></li>
+                                <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li><a href="blog_page.html">Events</a></li>
+                        <li><a href="potfolio.html">Portfolio</a></li>
+                        <li><a href="contact.php">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!--====== OFFCANVAS MOBILE MENU PART START ======-->
+
+
+
+    <section class="blog-post-area pt-130 pb-130"
+        style=" background-color: #eaf0f6; padding-top: 0px; padding-bottom: 0px;">
+        <div class="container" style="padding-top: 50px;">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center">
+                        <h3 class="title" id="ser1">Our Services</h3>
+
+                    </div> <!-- section title -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!--Body Part Start -->
+
+    <section class="blog-post-area pt-130 pb-130">
+        <div class="container md1-c">
+            <div class="image-container md1-i">
+                <img src="assets/images/services/web development-02.png" alt="Web Design And Web Development">
+            </div>
+            <div class="content-container">
+                <h4>Web Design and Web Development</h4><br>
+                <p>Discover a new dimension of efficiency with Scratch Software Solutions. Our powerful tools are
+                    crafted
+                    to empower your workflow, making the complex feel simple and the daunting, achievable. Say farewell
+                    to
+                    manual tasks and unlock a world of automation, precision, and growth. Join countless others who have
+                    already embraced the future of web development with Scratch Software Solutions.
+                </p><br>
+                <a class="btn main-btn mouse-hover" href="Web_Design_And_Web_Development.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a>
+            </div>
+        </div>
+        <div class="container md2-c">
+            <div class="image-container md2-i">
+                <img src="assets/images/services/Mobile app-02.png" alt="Web Design And Web Development">
+            </div>
+            <div class="content-container md2-t">
+                <h4>App Development</h4><br>
+                <p>Unlock the potential of the mobile era with Scratch Software Solutions. Our App Development
+                    services are designed to turn your ideas into user-centric digital solutions. Whether you're a
+                    startup
+                    aiming to disrupt the market or an established brand seeking to enhance customer engagement, we
+                    craft
+                    apps that seamlessly blend innovation and functionality.</p><br>
+                <a class="btn main-btn mouse-hover" href="App_Development.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a>
+            </div>
+        </div>
+
+        <div class="container md1-c">
+            <div class="image-container md1-i">
+                <img src="assets/images/services/Enterprice software development-02.png"
+                    alt="Web Design And Web Development">
+            </div>
+            <div class="content-container">
+                <h4>Enterprise Software Development</h4><br>
+                <p>At Scratch Software Solutions, we redefine possibilities through tailored Enterprise Software
+                    Development. We understand that every organization is unique, and our solutions are crafted to
+                    amplify
+                    your efficiency, innovation, and growth. Our team of seasoned developers and industry experts
+                    collaborate closely to create custom software that seamlessly integrates with your existing systems,
+                    streamlines operation.
+                </p>
+                <br>
+                <a class="btn main-btn mouse-hover" href="Enterprise_Software_Development.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a>
+            </div>
+        </div>
+        <div class="container md2-c">
+            <div class="image-container md2-i">
+                <img src="assets/images/services/Web hosting-02.png" alt="Web Design And Web Development">
+            </div>
+            <div class="content-container md2-t">
+                <h4>Website Maintanance/Hosting</h4><br>
+                <p>Experience worry-free online presence with Scratch Software Solutions comprehensive Website
+                    Maintenance
+                    and Hosting services. We understand that your website is the digital face of your brand, and we're
+                    here
+                    to ensure it stays polished and performs at its best. Our team of experts handles all the technical
+                    aspects, from regular updates and security enhancements to seamless hosting solutions.
+                </p><br>
+                <a class="btn main-btn mouse-hover" href="Website_Maintanance_Hosting.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a>
+            </div>
+        </div>
+        <div class="container md1-c">
+            <div class="image-container md1-i">
+                <img src="assets/images/services/Creative services-02.png" alt="Web Design And Web Development">
+            </div>
+            <div class="content-container">
+                <h4>Creative Services</h4><br>
+                <p>Welcome to a realm of boundless creativity at Scratch Software Solutions. Our Creative Services are
+                    more
+                    than just design; they're a journey of imagination and innovation. From concept to execution, our
+                    talented team of designers, writers, and artists collaborate to bring your ideas to life in ways
+                    that
+                    captivate and resonate.
+                </p><br>
+                <a class="btn main-btn mouse-hover" href="Creative_Services.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a>
+            </div>
+        </div>
+        <div class="container md2-c">
+            <div class="image-container md2-i">
+                <img src="assets/images/services/Digital marketing-02.png" alt="Web Design And Web Development">
+            </div>
+            <div class="content-container md2-t">
+                <h4>Digital Marketing</h4><br>
+                <p>Step into the spotlight of the digital landscape with Scratch Software Solutions Digital Marketing
+                    expertise. Our strategic approach is designed to illuminate your brand and connect you with your
+                    target
+                    audience. From crafting compelling campaigns to optimizing your online presence, we're your partners
+                    in
+                    navigating the dynamic world of digital marketing.
+                </p><br>
+                <a class="btn main-btn mouse-hover" href="Digital_Marketinghtml.html">Read More<span></span><i
+                        class="flaticon-arrow-pointing-to-right"></i></a><br><br>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Body Part End -->
+
+
+
+
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer class="footer-area">
+        <div class="footer-widget pt-100 pb-80">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="footer-address pt-35">
+
+                            <ul>
+                                <li>
+                                    <div class="footer-logo">
+                                        <img src="assets/images/normal/162x55.png" class="img-fluid" alt="Logo"
+                                            style="width:70%">
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div> <!-- footer address -->
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="footer-link pt-35">
+                            <ul>
+                                <li><a href="index.html"><i class="icofont-rounded-right"></i>Home</a></li>
+                                <li><a href="about.html"><i class="icofont-rounded-right"></i>About Us</a></li>
+                                <li><a href="services.html"><i class="icofont-rounded-right"></i>Services</a></li>
+                                <li><a href="potfolio.html"><i class="icofont-rounded-right"></i>Portfolio</a></li>
+                                <li><a href="contact.php"><i class="icofont-rounded-right"></i>Contact</a></li>
+
+
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-instagram pt-35">
+
+                            <div class="footer-address pt-35">
+                                <ul>
+                                    <li>
+                                        <div class="single-address py-2 d-flex">
+                                            <div class="address-icon">
+                                                <i class="flaticon-phone-call"></i>
+                                            </div>
+                                            <div class="address-content media-body">
+                                                <p class="text">+91 9042644069</p>
+                                            </div>
+                                        </div> <!-- single address -->
+                                    </li>
+                                    <li>
+                                        <div class="single-address d-flex">
+                                            <div class="address-icon">
+                                                <i class="flaticon-placeholder"></i>
+                                            </div>
+                                            <div class="address-content media-body">
+
+                                                <p class="text">Ettani</p>
+                                                <p class="text">Karungal, 629157</p>
+                                                <p class="text">kanyakumari, Tamilnadu</p>
+
+                                            </div>
+                                        </div> <!-- single address -->
+                                    </li>
+                                    <li>
+                                        <div class="single-address d-flex">
+                                            <div class="address-icon">
+                                                <i class="flaticon-email"></i>
+                                            </div>
+                                            <div class="address-content media-body">
+                                                <p class="text">info@scratchsoftwaresolutions.com</p>
+
+                                            </div>
+                                        </div> <!-- single address -->
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div> <!-- footer Instagram Feeds
+ -->
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-link pt-35">
+
+
+                            <div class="email-sub-content pt-20 pb-50">
+                                <p>Contact us today to embark on an exciting journey of digital transformation.
+                                    to life </p>
+                            </div>
+
+                            <div class="social-icons">
+                                <ul>
+                                    <li style="display: inline"><a
+                                            href="https://www.facebook.com/people/Scratch-Software-Solutions/100094091524895/?mibextid=ZbWKwL"
+                                            style="padding: 15px !important;" target="_blank"><i
+                                                class="flaticon-facebook-circular-logo"></i></a></li>
+                                    <li style="display: inline"><a
+                                            href="https://instagram.com/scratchsoftwaresolutions?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D"
+                                            style="padding: 15px !important;" target="_blank"><i
+                                                class="flaticon-instagram"></i></a></li>
+                                    <li style="display: inline"><a href="#" style="padding: 15px !important;"
+                                            margin-bottom="10px" target="_blank"><i
+                                                class="fa fa-linkedin-square"></i></a></li>
+                                </ul>
+                            </div>
+
+
+                        </div> <!-- footer link -->
+                    </div>
+
+
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+
+        <div class="footer-copyright pt-10 pb-20">
+            <div class="container">
+                <div class="copyright text-center pt-10">
+
+                    <p class="pt-2 text">All copyrights reserved © 2023 - Designed & Developed by <a
+                            href="https://scratchsoftwaresolutions.com/">Scratch Software Solutions</a> </p>
+                </div> <!-- copyright -->
+                <div class="footer-bottom text-center pt-15">
+
+                    <!-- payment -->
+                </div> <!-- copyright payment -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+
+
+
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top back-blue"><i class="flaticon-up-arrow"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+
+    <!--====== jquery js ======-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+
+    <!--====== Ajax Contact js ======-->
+    <script src="assets/js/ajax-contact.js"></script>
+
+    <!--====== wow.min js ======-->
+    <script src="assets/js/wow.min.js"></script>
+
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
+
+
+        // preloader
+        $(window).on('load', function (event) {
+            $('.gridtemplate-loader').delay(500).fadeOut(500);
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

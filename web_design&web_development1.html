@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="keywords" content="Scratch software solutions">
+<meta name="author" content="Scratch software solutions">
+<title>Scratch software solutions</title>
+<link rel="shortcut icon" href="assets/images/normal/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/fonts/flaticon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js'</script>
+<style>
+:root{--b:#0741AE;--b2:#1d62e8;--navy:#04184a;--ink:#0d1b3a;--mut:#51607d;--soft:#eaf0f6;--line:#dbe4f3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}
+:focus-visible{outline:3px solid var(--b2);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+main,footer{position:relative;z-index:1}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.pg{position:fixed;top:0;left:0;right:0;height:3px;z-index:120;background:linear-gradient(90deg,var(--b),var(--b2));transform-origin:left;transform:scaleX(0)}
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid var(--b);border-radius:50%;pointer-events:none;z-index:200;opacity:0;transition:width .25s,height .25s,margin .25s,background .25s,opacity .3s}
+.cur.big{width:68px;height:68px;margin:-34px 0 0 -34px;background:rgba(7,65,174,.12)}
+
+/* preloader */
+.pre{position:fixed;inset:0;background:#fff;z-index:999;display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+.pre.off{opacity:0;visibility:hidden}
+.pre div{position:relative;width:84px;height:84px;display:grid;place-items:center}
+.pre div::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--soft);border-top-color:var(--b);animation:spin 1s linear infinite}
+.pre img{width:38px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* header */
+.hd{position:fixed;top:14px;left:0;right:0;z-index:100;transition:top .3s}
+.hd.sc{top:8px}
+.bar{position:relative;isolation:isolate;width:min(1180px,100% - 28px);margin:0 auto;height:68px;padding:0 14px 0 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.bar::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:999px;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);box-shadow:0 12px 36px rgba(7,65,174,.12);transition:.3s}
+.hd.sc .bar::before{background:rgba(255,255,255,.92);box-shadow:0 14px 40px rgba(7,65,174,.2)}
+.logo img{height:42px;width:auto;mix-blend-mode:multiply}
+.menu{display:flex;align-items:center;gap:2px}
+.menu>li{position:relative}
+.menu>li>a{display:block;padding:9px 15px;border-radius:999px;font-weight:600;font-size:15px;transition:.2s}
+.menu>li>a:hover,.menu>li>a.act{background:var(--soft);color:var(--b)}
+.sub{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px;box-shadow:0 24px 50px rgba(7,30,80,.18);opacity:0;visibility:hidden;transform:perspective(700px) rotateX(-12deg) translateY(8px);transform-origin:top;transition:.25s}
+.has:hover .sub,.has:focus-within .sub{opacity:1;visibility:visible;transform:none}
+.sub a{display:block;padding:10px 14px;border-radius:11px;font-size:15px;font-weight:500}
+.sub a:hover{background:var(--soft);color:var(--b)}
+.m-only{display:none}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--b);color:#fff;padding:14px 28px;border-radius:999px;font-weight:700;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s,background .25s}
+.btn:hover{background:var(--b2);transform:translateY(-3px);box-shadow:0 14px 28px rgba(7,65,174,.3)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:18px;cursor:pointer}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;padding:130px 0 80px;display:flex;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 55% at 80% 40%,rgba(7,65,174,.13),transparent 70%),radial-gradient(40% 40% at 6% 92%,rgba(29,98,232,.1),transparent 70%);pointer-events:none}
+.hg{position:relative;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center}
+.big{font-size:clamp(44px,7vw,92px);font-weight:800;line-height:1.02;letter-spacing:-.04em;margin-bottom:24px}
+.hero p.lt{font-size:clamp(17px,1.7vw,20px);color:var(--mut);max-width:520px}
+.js .a{opacity:0;transform:translateY(34px);animation:up .9s cubic-bezier(.2,.7,.2,1) var(--d) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* hero: 3D photo plate with floating badges */
+.hv{position:relative;perspective:1500px;padding:24px 34px 40px}
+.hp{position:relative;transform-style:preserve-3d;transform:rotateX(calc(8deg + var(--rx,0deg))) rotateY(calc(-14deg + var(--ry,0deg)));transition:transform .3s ease-out}
+.hp>img{position:relative;display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px;border:9px solid #fff;box-shadow:0 44px 90px rgba(7,65,174,.32)}
+.hp::before,.hp::after{content:"";position:absolute;inset:0;border-radius:32px;border:2px solid var(--b)}
+.hp::before{transform:translateZ(-60px) translate(28px,28px);opacity:.28;background:rgba(7,65,174,.05)}
+.hp::after{transform:translateZ(-120px) translate(56px,56px);opacity:.14}
+.fb{position:absolute;transform-style:preserve-3d}
+.fbi{width:80px;height:80px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 48px rgba(7,65,174,.26);display:grid;place-items:center;animation:bobc 5s ease-in-out infinite alternate}
+.fbi svg{width:36px;height:36px;fill:none;stroke:var(--b);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fbi i{font-size:30px;color:var(--b)}
+.fbi.av{padding:0;overflow:hidden;border-radius:50%;width:88px;height:88px;border:4px solid #fff}
+.fbi.av img{width:100%;height:100%;object-fit:cover}
+.fb1{left:-6px;top:-12px;transform:translateZ(130px)}
+.fb2{right:-4px;top:52px;transform:translateZ(170px)}.fb2 .fbi{animation-delay:-1.6s}
+.fb3{right:60px;bottom:-12px;transform:translateZ(110px)}.fb3 .fbi{animation-delay:-3s}
+@keyframes bobc{from{transform:translateY(-8px)}to{transform:translateY(10px)}}
+
+/* shared */
+.sec{padding:120px 0}
+.st{text-align:center;margin-bottom:56px}
+.st h3{font-size:clamp(32px,4.6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.12;display:inline-block;perspective:700px}
+.st h3 .ch{display:inline-block;transform-origin:50% 100%}
+.st::after{content:"";display:block;width:84px;height:4px;border-radius:4px;background:var(--b);margin:20px auto 0}
+.js .st h3 .ch{opacity:0;transform:translateY(40%) rotateX(-95deg)}
+.js .st.in h3 .ch{opacity:1;transform:none;transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .st::after{transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.7,.2,1) .5s}
+.js .st.in::after{transform:scaleX(1)}
+.js .rv{opacity:0;transform:perspective(1000px) translateY(46px) rotateX(18deg) translateZ(-90px)}
+.js .rv.in{opacity:1;transform:perspective(1000px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .rv.r{transform:perspective(1000px) translateX(60px) rotateY(-16deg) translateZ(-90px)}
+.js .rv.r.in{transform:perspective(1000px)}
+.js .fd{opacity:0;transition:opacity 1s ease}.js .fd.in{opacity:1}
+.t3{transform-style:preserve-3d}
+.js .t3.done{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.js .t3.done.tl{transition:transform .1s linear,box-shadow .35s}
+
+/* hero: the banner photo fills the whole background, untouched */
+.hero2{position:relative;min-height:84vh;min-height:84svh;display:flex;align-items:center;justify-content:center;padding:140px 0 130px;background:#dfe7f5;overflow:hidden}
+.hbg{position:absolute;inset:-5%;background:url("assets/images/services/Web_Development/Banner-output.jpg") center/cover no-repeat;transform:translate3d(var(--bx,0px),calc(var(--by,0px) + var(--sy,0px)),0) scale(1.04);transition:transform .35s ease-out;will-change:transform}
+.hero2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(to top,#fff 8%,rgba(255,255,255,0));pointer-events:none}
+.hero2 .wrap{position:relative;z-index:2;perspective:1200px;display:flex;justify-content:center}
+.tt{display:inline-block;text-align:center;max-width:920px;padding:26px 52px 30px;border-radius:32px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.75);box-shadow:0 34px 80px rgba(4,24,74,.28);transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out}
+.tt .big{margin:0;font-size:clamp(30px,4.6vw,62px);line-height:1.12}
+.tt::after{content:"";display:block;width:84px;height:5px;border-radius:5px;background:var(--b);margin:16px auto 0}
+
+/* intro: words light up as you scroll */
+.why-p{max-width:1000px;margin:0 auto;font-size:clamp(22px,3.1vw,38px);font-weight:700;line-height:1.45;letter-spacing:-.02em;text-align:center;transform-origin:50% 100%;will-change:transform}
+.why-p p+p{margin-top:34px}
+.js .why-p .w{color:rgba(13,27,58,.16);transition:color .45s}
+.js .why-p .w.lit{color:var(--ink)}
+
+/* the six services: a fan of 3D panels, the active one opens */
+.ac{display:flex;gap:14px;height:580px;perspective:1800px}
+.pn{--rot:calc((var(--a,0) - var(--i)) * 5deg);position:relative;flex:1;min-width:0;border-radius:30px;overflow:hidden;cursor:pointer;background:var(--soft);box-shadow:0 26px 56px rgba(7,65,174,.2);transform:rotateY(var(--rot));transition:flex .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.pn.on{flex:6;box-shadow:0 40px 80px rgba(7,65,174,.32)}
+.pn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.pn.on img{transform:scale(1.05)}
+.vt{position:absolute;left:50%;bottom:18px;max-height:calc(100% - 36px);padding:16px 11px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--b);font-size:15px;font-weight:800;white-space:nowrap;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);transition:opacity .4s,visibility .4s;box-shadow:0 10px 24px rgba(7,65,174,.18)}
+.pn.on .vt{opacity:0;visibility:hidden}
+.cap{position:absolute;left:18px;right:18px;bottom:18px;padding:24px 28px;border-radius:24px;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transform:translateY(26px);pointer-events:none;transition:opacity .4s,transform .6s}
+.pn.on .cap{opacity:1;transform:none;pointer-events:auto;transition:opacity .6s .35s,transform .8s .35s cubic-bezier(.2,.7,.2,1)}
+.cap h5{font-size:clamp(20px,2.2vw,26px);font-weight:800;color:var(--b);line-height:1.25;margin-bottom:10px}
+.cap p{font-size:16px;color:var(--mut);line-height:1.8}
+@media(max-width:900px){
+  .ac{flex-direction:column;height:auto;perspective:none}
+  .pn{flex:none;height:96px;transform:none!important;transition:height .8s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+  .pn.on{height:470px}
+  .vt{writing-mode:horizontal-tb;transform:translateY(50%);left:14px;bottom:50%;max-height:none;padding:9px 18px;font-size:14.5px;max-width:calc(100% - 28px);white-space:normal}
+  .cap{left:12px;right:12px;bottom:12px;padding:20px 22px}
+}
+
+/* footer */
+footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
+.fg{display:grid;grid-template-columns:1.3fr .8fr 1.3fr 1.3fr;gap:44px;padding-bottom:56px}
+.fg img{width:70%;max-width:230px}.fg ul{display:grid;gap:11px}.fg a:hover{color:#fff}
+.fg .ad li{display:flex;gap:14px;align-items:flex-start}.fg .ad i{color:#7aa5ff;margin-top:4px;width:18px}.fg .ad p{line-height:1.55}
+.sci{display:flex;gap:10px;margin-top:24px}
+.sci a{width:44px;height:44px;border-radius:50%;border:1px solid #2a3b6b;display:grid;place-items:center;color:#fff;transition:.25s}
+.sci a:hover{background:var(--b);border-color:var(--b);transform:translateY(-4px) scale(1.1)}
+.copyr{border-top:1px solid #1b2a52;padding:22px 20px;width:100%}
+.copyr p{margin:0;width:100%;text-align:center!important;color:#b7c5e6;font-size:15px;line-height:1.6}
+.copyr a{color:#fff;font-weight:600}
+.top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0));width:48px;height:48px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 12px 26px rgba(7,30,80,.35);z-index:90}
+.top.show{opacity:1;pointer-events:auto}
+
+@media(hover:hover) and (pointer:fine){.js .cur{opacity:1}}
+@media(max-width:1000px){
+  .burger{display:block;position:relative;z-index:130}.cta{display:none}.m-only{display:block}
+  .menu-open .logo{position:relative;z-index:130}
+  body.menu-open{overflow:hidden}
+  .menu{position:fixed;inset:0;z-index:125;background:#fff;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:96px 24px calc(28px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
+  .menu-open .menu{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .menu>li{width:100%;border-bottom:1px solid var(--line);opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}
+  .menu-open .menu>li{opacity:1;transform:none}
+  .menu-open .menu>li:nth-child(1){transition-delay:.12s}.menu-open .menu>li:nth-child(2){transition-delay:.17s}.menu-open .menu>li:nth-child(3){transition-delay:.22s}.menu-open .menu>li:nth-child(4){transition-delay:.27s}.menu-open .menu>li:nth-child(5){transition-delay:.32s}.menu-open .menu>li:nth-child(6){transition-delay:.37s}.menu-open .menu>li:nth-child(7){transition-delay:.42s}
+  .menu>li:not(.m-only)>a{display:flex;align-items:center;justify-content:space-between;padding:17px 4px;font-size:19px;font-weight:700;border-radius:0}
+  .menu>li:not(.m-only)>a:hover,.menu>li:not(.m-only)>a.act{background:none;color:var(--b)}
+  .has>a::after{content:"\f107";font-family:FontAwesome;font-weight:400;font-size:22px;color:var(--b);transition:transform .3s}
+  .has.open>a::after{transform:rotate(180deg)}
+  .sub{position:static;display:block;min-width:0;max-height:0;overflow:hidden;opacity:1;visibility:visible;transform:none;background:none;border:0;border-radius:0;box-shadow:none;padding:0 0 0 6px;transition:max-height .45s ease}
+  .has.open .sub{max-height:640px;padding-bottom:12px}
+  .sub a{padding:12px 14px;font-size:16px;font-weight:500;color:var(--mut);border-left:2px solid var(--line);border-radius:0}
+  .sub a:hover{background:none;color:var(--b);border-left-color:var(--b)}
+  .menu>li.m-only{border:0;margin-top:auto;padding-top:26px}
+  .menu .m-only .btn{display:flex;width:100%;justify-content:center;padding:16px 24px;font-size:16px;color:#fff}
+  .hg,.mg{grid-template-columns:1fr;gap:40px}.hero{padding-top:110px}
+  .ml{position:static}
+  .fg{grid-template-columns:1fr 1fr}.sec{padding:84px 0}
+}
+@media(max-width:820px){
+  .mc{position:relative;top:auto;transform:none!important;margin-bottom:22px}
+  .mi{grid-template-columns:1fr;gap:20px;padding:32px 26px 32px 32px}.bgi{width:76px;height:76px}
+}
+@media(max-width:640px){.hv{padding:12px 16px 30px}.fbi{width:56px;height:56px;border-radius:18px}.fbi.av{width:60px;height:60px;border-radius:50%}.fbi svg{width:26px;height:26px}.fbi i{font-size:22px}.fb1{left:-2px;top:-6px}.fb2{right:0;top:36px}.fb3{right:30px;bottom:-6px}.fg{grid-template-columns:1fr}.mcd{padding:28px 24px 28px 30px}}
+@media(max-width:1000px){.hero2{min-height:70vh;padding:130px 0 100px}}
+@media(max-width:640px){.tt{padding:20px 26px 24px}.hero2{min-height:62vh;padding:120px 0 80px}}
+@media(prefers-reduced-motion:reduce){
+  .tci{transition:none}
+  *{animation:none!important;scroll-behavior:auto!important}
+  .js .rv,.js .st h3 .ch,.js .st::after,.js .a,.js .fd{opacity:1!important;transform:none!important;transition:none!important}
+  .js .why-p .w{color:var(--ink)}
+  .mc{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="pre"><div><img src="assets/images/normal/favicon.png" alt=""></div></div>
+<div class="pg" id="pg"></div>
+<div class="cur" id="cur"></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!--====== HEADER ======-->
+<header class="hd">
+  <div class="bar">
+    <a class="logo" href="index.html"><img src="assets/images/normal/122.jpg" alt="Logo"></a>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="has"><a href="about.html">About Us</a>
+        <ul class="sub">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="our_team.html">Our Team</a></li>
+          <li><a href="CEO_Message.html">CEO Message</a></li>
+        </ul>
+      </li>
+      <li class="has"><a href="services.html" class="act">Services</a>
+        <ul class="sub">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="Web_Design_And_Web_Development.html">Web Design And Web Development</a></li>
+          <li><a href="App_Development.html">App Development</a></li>
+          <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting Support</a></li>
+          <li><a href="Enterprise_Software_Development.html">Enterprise Software Development</a></li>
+          <li><a href="Creative_Services.html">Creative Services</a></li>
+          <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+        </ul>
+      </li>
+      <li><a href="blog_page.html">Events</a></li>
+      <li><a href="potfolio.html">Portfolio</a></li>
+      <li><a href="contact.php">Contact</a></li>
+      <li class="m-only"><a class="btn" href="contact.php#contact" style="color:#fff;justify-content:center;margin-top:14px">Get a Quote</a></li>
+    </ul>
+    <a class="btn cta" href="contact.php#contact">Get a Quote</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><i class="fa fa-bars"></i></button>
+  </div>
+</header>
+
+<main>
+<!--====== HERO: banner photo as the full background ======-->
+<div class="hero2" id="back1">
+  <div class="hbg" id="hbg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="a" style="--d:.2s"><div class="tt" id="tilt"><h1 class="big">Web Design And Web Development</h1></div></div>
+  </div>
+</div>
+
+<!--====== INTRO (words light up as you scroll) ======-->
+<section class="sec">
+  <div class="wrap">
+    <div class="why-p" id="why">
+      <p>In the ever-evolving realm of web design and development, crafting a seamless digital presence demands a harmonious fusion of aesthetics and functionality. Effective web design encompasses a symphony of visual hierarchy, thoughtful typography, and intuitive user interfaces, all aimed at delivering an exceptional user experience.</p>
+      <p>The responsive interplay of HTML5, CSS3, and JavaScript orchestrates the intricate dance of content and design, adapting gracefully across an array of devices and screen sizes. From the canvas of back-end development arises the heartbeat of databases, server-side logic, and APIs, fostering secure and efficient interactions.</p>
+      <p>As technology's cadence persists, an unwavering dedication to optimization, security, and ongoing learning conducts the ongoing success of a web professional in this dynamic landscape.</p>
+    </div>
+  </div>
+</section>
+
+<!--====== THE SIX WEB SERVICES (hover or tap a panel to open it) ======-->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="rv"><div class="ac" id="ac">
+        <article class="pn on" style="--i:0" tabindex="0">
+          <img src="assets/images/services/Web_Development/Corporate.jpg" alt="Corporate Web Development" loading="lazy">
+          <span class="vt" aria-hidden="true">Corporate Web Development</span>
+          <div class="cap"><h5>Corporate Web Development</h5><p>Elevate your corporate presence with our expert web development. We create tailored websites that embody your brand and streamline functionality. From responsive design to cutting-edge tech integration, we drive professionalism and results.</p></div>
+        </article>
+        <article class="pn" style="--i:1" tabindex="0">
+          <img src="assets/images/services/Web_Development/E-commerce.jpg" alt="E-Commerce Web Development" loading="lazy">
+          <span class="vt" aria-hidden="true">E-Commerce Web Development</span>
+          <div class="cap"><h5>E-Commerce Web Development</h5><p>Empower your online business with our specialized e-commerce web development. Our team creates seamless and captivating online stores that enhance user experiences and drive sales. From intuitive navigation to secure payment gateways, we craft e-commerce solutions that deliver results.</p></div>
+        </article>
+        <article class="pn" style="--i:2" tabindex="0">
+          <img src="assets/images/services/Web_Development/CMS.jpg" alt="CMS Web Development" loading="lazy">
+          <span class="vt" aria-hidden="true">CMS Web Development</span>
+          <div class="cap"><h5>CMS Web Development</h5><p>Unlock easy content management with our CMS web development. We build user-friendly websites that put you in control of your content. With intuitive interfaces and powerful features, managing your online presence has never been more efficient.</p></div>
+        </article>
+        <article class="pn" style="--i:3" tabindex="0">
+          <img src="assets/images/services/Web_Development/Web_portal.jpg" alt="Web Portal Design" loading="lazy">
+          <span class="vt" aria-hidden="true">Web Portal Design</span>
+          <div class="cap"><h5>Web Portal Design</h5><p>Experience seamless navigation and centralized information with our web portal design. We craft intuitive gateways that connect users to resources effortlessly. From user-friendly interfaces to personalized interactions, we create portals that redefine convenience and engagement.</p></div>
+        </article>
+        <article class="pn" style="--i:4" tabindex="0">
+          <img src="assets/images/services/Web_Development/Website-redesign.jpg" alt="Website Redesigning" loading="lazy">
+          <span class="vt" aria-hidden="true">Website Redesigning</span>
+          <div class="cap"><h5>Website Redesigning</h5><p>Revitalize your digital presence with our website redesigning services. We transform outdated websites into modern, engaging platforms that captivate audiences and reflect your brand's evolution. Elevate user experiences and stay ahead in the digital landscape with our expert redesign solutions.</p></div>
+        </article>
+        <article class="pn" style="--i:5" tabindex="0">
+          <img src="assets/images/services/Web_Development/Website-custom-design.jpg" alt="Custom Web Design" loading="lazy">
+          <span class="vt" aria-hidden="true">Custom Web Design</span>
+          <div class="cap"><h5>Custom Web Design</h5><p>Unleash your vision with our custom web design services. We turn your ideas into pixel-perfect realities, creating unique online experiences that resonate with your audience. Our team combines creativity and technical expertise to craft a website that's as distinct as your brand.</p></div>
+        </article>
+    </div></div>
+  </div>
+</section>
+</main>
+
+<!--====== FOOTER ======-->
+<footer>
+  <div class="wrap fg">
+    <div><img src="assets/images/normal/162x55.png" alt="Logo"></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="potfolio.html">Portfolio</a></li>
+      <li><a href="contact.php">Contact</a></li>
+    </ul>
+    <ul class="ad">
+      <li><i class="flaticon-phone-call"></i><p>+91 9042644069</p></li>
+      <li><i class="flaticon-placeholder"></i><div><p>Ettani</p><p>Karungal, 629157</p><p>kanyakumari, Tamilnadu</p></div></li>
+      <li><i class="flaticon-email"></i><p>scratchsoftwaresolutions@gmail.com</p></li>
+    </ul>
+    <div>
+      <p>Contact us today to embark on an exciting journey of digital transformation. to life</p>
+      <div class="sci">
+        <a href="https://www.facebook.com/people/Scratch-Software-Solutions/100094091524895/?mibextid=ZbWKwL" target="_blank" rel="noopener" aria-label="Facebook"><i class="flaticon-facebook-circular-logo"></i></a>
+        <a href="https://instagram.com/scratchsoftwaresolutions?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D" target="_blank" rel="noopener" aria-label="Instagram"><i class="flaticon-instagram"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa fa-linkedin-square"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="copyr">
+    <p>All copyrights reserved © 2023 - Designed &amp; Developed by <a href="https://scratchsoftwaresolutions.com/">Scratch Software Solutions</a></p>
+  </div>
+</footer>
+
+<a href="#" class="top" aria-label="Back to top"><i class="flaticon-up-arrow"></i></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))};
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mx=0,my=0;
+
+  /* preloader */
+  var pre=$('.pre'),hide=function(){pre.classList.add('off')};
+  addEventListener('load',function(){setTimeout(hide,400)});setTimeout(hide,3000);
+
+  /* mobile menu */
+  var bg=$('.burger'),bi=bg.querySelector('i');
+  function setMenu(o){
+    document.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o);bi.className=o?'fa fa-times':'fa fa-bars';
+    if(!o)$$('.has.open').forEach(function(h){h.classList.remove('open')});
+  }
+  bg.onclick=function(){setMenu(!document.body.classList.contains('menu-open'))};
+  addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  addEventListener('resize',function(){if(innerWidth>1000)setMenu(false)});
+  /* tap About Us / Services to open or close its list */
+  $$('.has>a').forEach(function(a){a.addEventListener('click',function(e){if(innerWidth<=1000){e.preventDefault();a.parentNode.classList.toggle('open')}})});
+  /* any other link closes the menu */
+  $$('.menu a').forEach(function(a){a.addEventListener('click',function(){if(!a.parentNode.classList.contains('has'))setMenu(false)})});
+
+  /* section title letters */
+  $$('.st h3').forEach(function(h){
+    var t=h.textContent;h.setAttribute('aria-label',t);h.textContent='';var k=0;
+    t.split(' ').forEach(function(w,wi,a){
+      var s=document.createElement('span');s.style.cssText='display:inline-block;white-space:nowrap';s.setAttribute('aria-hidden','true');
+      w.split('').forEach(function(c){var x=document.createElement('span');x.className='ch';x.textContent=c;x.style.transitionDelay=(k++*.045)+'s';s.appendChild(x)});
+      h.appendChild(s);if(wi<a.length-1)h.appendChild(document.createTextNode(' '));
+    });
+  });
+
+  /* scroll reveal */
+  function doneLater(el){setTimeout(function(){el.style.transitionDelay='';el.classList.add('done')},1500)}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');io.unobserve(el);
+      if(el.classList.contains('t3'))doneLater(el);
+    })},{threshold:.15,rootMargin:'0px 0px -50px 0px'});
+    $$('.rv,.st,.fd').forEach(function(el){io.observe(el)});
+  }else{$$('.rv,.st,.fd').forEach(function(el){el.classList.add('in','done')})}
+
+  /* intro words */
+  var why=$('#why'),words=[],lastK=-1;
+  if(!rm)$$('#why p').forEach(function(p){
+    var t=p.textContent.trim().split(/\s+/);p.textContent='';
+    t.forEach(function(w,i){var s=document.createElement('span');s.className='w';s.textContent=w;p.appendChild(s);if(i<t.length-1)p.appendChild(document.createTextNode(' '));words.push(s)});
+  });
+
+  /* service panels: hover (or tap) one to open it, they also cycle on their own */
+  var ac=$('#ac'),pns=$$('.pn'),cur=0,atm;
+  function act(i){cur=i;pns.forEach(function(p,k){p.classList.toggle('on',k===i)});ac.style.setProperty('--a',i)}
+  function auto(){clearInterval(atm);if(!rm)atm=setInterval(function(){act((cur+1)%pns.length)},5200)}
+  pns.forEach(function(p,k){
+    p.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)act(k)});
+    p.addEventListener('click',function(){act(k);auto()});
+    p.addEventListener('focus',function(){act(k)});
+  });
+  ac.addEventListener('mouseenter',function(){clearInterval(atm)});ac.addEventListener('mouseleave',auto);
+  act(0);auto();
+
+  /* tilt following the mouse */  /* tilt following the mouse */
+  if(!rm)$$('[data-tilt]').forEach(function(el){
+    var m=+el.dataset.tilt;
+    el.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'&&el.classList.contains('done'))el.classList.add('tl')});
+    el.addEventListener('pointermove',function(e){
+      if(e.pointerType!=='mouse'||!el.classList.contains('tl'))return;
+      var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      el.style.setProperty('--ry',(x*m*2).toFixed(2)+'deg');el.style.setProperty('--rx',(-y*m*2).toFixed(2)+'deg');
+    });
+    el.addEventListener('pointerleave',function(){el.classList.remove('tl');el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')});
+  });
+
+  /* scroll + mouse driven frame */
+  var pg=$('#pg'),top=$('.top'),hd=$('.hd'),tilt=$('#tilt'),hbg=$('#hbg'),tk=false;
+  function tick(){
+    tk=false;var y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+    pg.style.transform='scaleX('+(max>0?y/max:0)+')';
+    hd.classList.toggle('sc',y>40);top.classList.toggle('show',y>700);
+    if(!rm&&y<innerHeight*1.2)hbg.style.setProperty('--sy',(y*.2).toFixed(1)+'px');
+    if(!rm){
+      var r=why.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(r.height+innerHeight*.3)));
+      var k=Math.floor(p*words.length*1.06);
+      if(k!==lastK){lastK=k;words.forEach(function(w,i){w.classList.toggle('lit',i<k)})}
+      why.style.transform='perspective(1200px) rotateX('+((1-p)*12).toFixed(2)+'deg) translateY('+((1-p)*26).toFixed(1)+'px)';
+    }
+  }
+  function req(){if(!tk){tk=true;requestAnimationFrame(tick)}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);tick();
+
+  addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;
+    if(rm)return;
+    tilt.style.setProperty('--ry',(mx*10).toFixed(2)+'deg');tilt.style.setProperty('--rx',(-my*6).toFixed(2)+'deg');
+    hbg.style.setProperty('--bx',(-mx*26).toFixed(1)+'px');hbg.style.setProperty('--by',(-my*16).toFixed(1)+'px');
+  });
+
+  /* custom cursor */
+  var cu=$('#cur');
+  if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var tx=0,ty=0,cx=0,cy=0;
+    addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY});
+    document.addEventListener('mouseover',function(e){cu.classList.toggle('big',!!e.target.closest('a,button,input,select,textarea,.pn'))});
+    (function loop(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cu.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
+  }
+
+  /* ---------- WebGL background: 3 soft objects that match this page ---------- */
+  (function gl(){
+    if(!window.THREE||rm)return;
+    var cv=$('#gl'),ren;
+    try{ren=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true})}catch(e){return}
+    ren.setPixelRatio(Math.min(devicePixelRatio||1,1.75));ren.setSize(innerWidth,innerHeight,false);
+    var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,100);cam.position.z=14;
+    sc.add(new THREE.AmbientLight(0xffffff,.75));
+    var dl=new THREE.DirectionalLight(0xffffff,.95);dl.position.set(5,8,10);sc.add(dl);
+    var dl2=new THREE.DirectionalLight(0x9db8ff,.5);dl2.position.set(-6,-4,6);sc.add(dl2);
+    var narrow=innerWidth<1100,small=innerWidth<700,N=small?2:3,stp=4.2,vh=2*14*Math.tan(22.5*Math.PI/180),items=[],grp=new THREE.Group();sc.add(grp);
+    var OP=narrow?.42:.55;
+    function halfW(){return vh*(innerWidth/innerHeight)/2}
+    function mat(c){return new THREE.MeshPhongMaterial({color:c,shininess:25,transparent:true,opacity:OP})}
+    function flat(c){return new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:OP})}
+    function bx(w,h,d,m,x,y,z,rz){var o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x||0,y||0,z||0);o.rotation.z=rz||0;return o}
+
+    function pl(w,h,m,x,y,z){var o=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);o.position.set(x,y,z||.11);return o}
+    /* 1. browser window: web design */
+    function browser(){
+      var g=new THREE.Group(),a=mat(0x9db8ee),b=mat(0xc4d5f6);
+      g.add(bx(3,2.1,.16,a));
+      g.add(pl(2.8,1.55,flat(0xf3f7ff),0,-.2,.09));
+      g.add(bx(3,.4,.2,b,0,.85,0));
+      [-1.2,-1,-.8].forEach(function(x){var d=new THREE.Mesh(new THREE.SphereGeometry(.07,10,8),flat(0xeaf1ff));d.position.set(x,.85,.12);g.add(d)});
+      g.add(pl(1,.62,flat(0xc4d5f6),-.7,.1));
+      g.add(pl(1,.12,flat(0xdbe6fb),.65,.3));g.add(pl(1,.12,flat(0xdbe6fb),.65,.08));g.add(pl(.7,.12,flat(0xdbe6fb),.5,-.14));
+      g.add(pl(2.4,.14,flat(0xdbe6fb),0,-.55));g.add(pl(1.6,.14,flat(0xdbe6fb),-.4,-.78));
+      return g;
+    }
+    /* 2. code brackets: web development */
+    function brackets(){
+      var g=new THREE.Group(),b=mat(0x9db8ee),l=mat(0xc4d5f6);
+      g.add(bx(1.2,.3,.3,b,-1.1,.45,0,.845),bx(1.2,.3,.3,b,-1.1,-.45,0,-.845),
+            bx(1.2,.3,.3,b,1.1,.45,0,-.845),bx(1.2,.3,.3,b,1.1,-.45,0,.845),
+            bx(2,.26,.26,l,0,0,0,1.25));
+      return g;
+    }
+    /* 3. pointer arrow: user experience */
+    function pointer(){
+      var sh=new THREE.Shape();
+      sh.moveTo(0,0);sh.lineTo(0,-1.7);sh.lineTo(.45,-1.3);sh.lineTo(.78,-2);sh.lineTo(1.05,-1.87);sh.lineTo(.74,-1.2);sh.lineTo(1.3,-1.16);sh.lineTo(0,0);
+      var geo=new THREE.ExtrudeGeometry(sh,{depth:.16,bevelEnabled:true,bevelThickness:.05,bevelSize:.05,bevelSegments:2});geo.center();
+      var g=new THREE.Group();g.add(new THREE.Mesh(geo,mat(0x9db8ee)));g.rotation.z=.15;return g;
+    }
+    function tickObj(m,boost){
+      var u=m.userData;u.ph+=.008+boost*.4;var s=Math.sin(u.ph);
+      if(u.kind===0){m.rotation.y=s*.5;m.rotation.x=Math.sin(u.ph*.7)*.12}
+      else if(u.kind===1){m.rotation.y=s*.5}
+      else{m.rotation.y=s*.7;m.rotation.z=.15+Math.sin(u.ph*1.4)*.12}
+      m.position.y=u.by+Math.sin(u.ph*1.3)*.14;
+    }
+    var specs=[
+      {b:browser,side:-1,f:.92,y:1,s:.7},
+      {b:brackets,side:1,f:.9,y:-4.2,s:.75},
+      {b:pointer,side:-1,f:.9,y:-8.4,s:.85}
+    ];
+    for(var i=0;i<N;i++){
+      var sp=specs[i],m=sp.b();
+      m.scale.setScalar(sp.s*(narrow?.7:1)*(small?.8:1));
+      m.userData={side:sp.side,f:sp.f,ph:Math.random()*6,by:sp.y,kind:i};
+      m.position.set(sp.side*halfW()*sp.f,sp.y,-1);
+      grp.add(m);items.push(m);
+    }
+    var camY=0,lastS=scrollY,boost=0,run=true;
+    function resize(){ren.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();items.forEach(function(m){m.position.x=m.userData.side*halfW()*m.userData.f})}
+    addEventListener('resize',resize);
+    document.addEventListener('visibilitychange',function(){run=!document.hidden;if(run)frame()});
+    function frame(){
+      if(!run)return;requestAnimationFrame(frame);
+      var max=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=scrollY/max;
+      boost+=(Math.abs(scrollY-lastS)*.0007-boost)*.1;lastS=scrollY;
+      camY+=((-p*(N-1)*stp*.9)-camY)*.07;cam.position.y=camY;
+      grp.rotation.y+=((mx*.25)-grp.rotation.y)*.05;grp.rotation.x+=((my*.12)-grp.rotation.x)*.05;
+      items.forEach(function(m){tickObj(m,boost)});
+      ren.render(sc,cam);
+    }
+    frame();
+  })();
+})();
+</script>
+</body>
+</html>
