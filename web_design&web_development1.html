@@ -102,9 +102,8 @@ main,footer{position:relative;z-index:1}
 .js .t3.done.tl{transition:transform .1s linear,box-shadow .35s}
 
 /* hero: the banner photo fills the whole background, untouched */
-.hero2{position:relative;min-height:84vh;min-height:84svh;display:flex;align-items:center;justify-content:center;padding:140px 0 130px;background:#dfe7f5;overflow:hidden}
+.hero2{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:140px 0 130px;background:#dfe7f5;overflow:hidden}
 .hbg{position:absolute;inset:-5%;background:url("assets/images/services/Web_Development/Banner-output.jpg") center/cover no-repeat;transform:translate3d(var(--bx,0px),calc(var(--by,0px) + var(--sy,0px)),0) scale(1.04);transition:transform .35s ease-out;will-change:transform}
-.hero2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(to top,#fff 8%,rgba(255,255,255,0));pointer-events:none}
 .hero2 .wrap{position:relative;z-index:2;perspective:1200px;display:flex;justify-content:center}
 .tt{display:inline-block;text-align:center;max-width:920px;padding:26px 52px 30px;border-radius:32px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.75);box-shadow:0 34px 80px rgba(4,24,74,.28);transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out}
 .tt .big{margin:0;font-size:clamp(30px,4.6vw,62px);line-height:1.12}
@@ -116,25 +115,37 @@ main,footer{position:relative;z-index:1}
 .js .why-p .w{color:rgba(13,27,58,.16);transition:color .45s}
 .js .why-p .w.lit{color:var(--ink)}
 
-/* the six services: a fan of 3D panels, the active one opens */
-.ac{display:flex;gap:14px;height:580px;perspective:1800px}
-.pn{--rot:calc((var(--a,0) - var(--i)) * 5deg);position:relative;flex:1;min-width:0;border-radius:30px;overflow:hidden;cursor:pointer;background:var(--soft);box-shadow:0 26px 56px rgba(7,65,174,.2);transform:rotateY(var(--rot));transition:flex .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
-.pn.on{flex:6;box-shadow:0 40px 80px rgba(7,65,174,.32)}
-.pn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
-.pn.on img{transform:scale(1.05)}
-.vt{position:absolute;left:50%;bottom:18px;max-height:calc(100% - 36px);padding:16px 11px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--b);font-size:15px;font-weight:800;white-space:nowrap;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);transition:opacity .4s,visibility .4s;box-shadow:0 10px 24px rgba(7,65,174,.18)}
-.pn.on .vt{opacity:0;visibility:hidden}
-.cap{position:absolute;left:18px;right:18px;bottom:18px;padding:24px 28px;border-radius:24px;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transform:translateY(26px);pointer-events:none;transition:opacity .4s,transform .6s}
-.pn.on .cap{opacity:1;transform:none;pointer-events:auto;transition:opacity .6s .35s,transform .8s .35s cubic-bezier(.2,.7,.2,1)}
-.cap h5{font-size:clamp(20px,2.2vw,26px);font-weight:800;color:var(--b);line-height:1.25;margin-bottom:10px}
-.cap p{font-size:16px;color:var(--mut);line-height:1.8}
+/* the six services: a list of tabs and one big, clear picture */
+.tb{display:grid;grid-template-columns:minmax(260px,.72fr) 1.28fr;gap:56px;align-items:start}
+.tl{display:grid;gap:12px;position:sticky;top:110px}
+.tab{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:18px 22px;border-radius:20px;background:#fff;border:1px solid var(--line);font:inherit;font-size:18px;font-weight:700;color:var(--ink);text-align:left;cursor:pointer;transition:background .3s,color .3s,box-shadow .3s,transform .3s,border-color .3s}
+.tab i{font-size:22px;color:var(--b);transition:.3s}
+.tab:hover{border-color:var(--b);transform:translateX(6px)}
+.tab.on{background:var(--b);border-color:var(--b);color:#fff;box-shadow:0 18px 40px rgba(7,65,174,.3);transform:translateX(10px)}
+.tab.on i{color:#fff;transform:translateX(4px)}
+.tpic{perspective:1500px}
+.tframe{position:relative;aspect-ratio:16/10;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out}
+.tframe::before,.tframe::after{content:"";position:absolute;inset:0;border-radius:32px;border:2px solid var(--b)}
+.tframe::before{transform:translateZ(-50px) translate(22px,22px);opacity:.28;background:rgba(7,65,174,.05)}
+.tframe::after{transform:translateZ(-100px) translate(44px,44px);opacity:.14}
+.ti{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:28px;border:8px solid #fff;box-shadow:0 36px 70px rgba(7,65,174,.28);background:var(--soft);opacity:0;transform:translateX(-40px) rotateY(-22deg) translateZ(-80px);transition:opacity .6s,transform .9s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.ti.on{opacity:1;transform:none}
+.ti.out{opacity:0;transform:translateX(40px) rotateY(22deg) translateZ(-80px)}
+.tinfo{display:grid;margin-top:70px}
+.tp{grid-area:1/1;border-left:4px solid var(--b);padding:4px 0 4px 26px;opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .4s,transform .6s,visibility .4s}
+.tp.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s .2s,transform .7s .2s cubic-bezier(.2,.7,.2,1),visibility 0s}
+.tp h5{font-size:clamp(24px,2.6vw,32px);font-weight:800;color:var(--b);line-height:1.25;margin-bottom:12px}
+.tp p{font-size:17.5px;color:var(--mut);line-height:1.9}
 @media(max-width:900px){
-  .ac{flex-direction:column;height:auto;perspective:none}
-  .pn{flex:none;height:96px;transform:none!important;transition:height .8s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
-  .pn.on{height:470px}
-  .vt{writing-mode:horizontal-tb;transform:translateY(50%);left:14px;bottom:50%;max-height:none;padding:9px 18px;font-size:14.5px;max-width:calc(100% - 28px);white-space:normal}
-  .cap{left:12px;right:12px;bottom:12px;padding:20px 22px}
+  .tb{grid-template-columns:1fr;gap:34px}
+  .tl{position:static;display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .tab{flex:none;width:auto;white-space:nowrap;padding:14px 20px;font-size:16px;scroll-snap-align:start}
+  .tab i{display:none}.tab:hover,.tab.on{transform:none}
+  .tframe::before{transform:translateZ(-50px) translate(12px,12px)}.tframe::after{display:none}
+  .tinfo{margin-top:36px}
 }
+
+.hero2+.sec{padding-top:72px}
 
 /* footer */
 footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
@@ -179,8 +190,8 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
   .mi{grid-template-columns:1fr;gap:20px;padding:32px 26px 32px 32px}.bgi{width:76px;height:76px}
 }
 @media(max-width:640px){.hv{padding:12px 16px 30px}.fbi{width:56px;height:56px;border-radius:18px}.fbi.av{width:60px;height:60px;border-radius:50%}.fbi svg{width:26px;height:26px}.fbi i{font-size:22px}.fb1{left:-2px;top:-6px}.fb2{right:0;top:36px}.fb3{right:30px;bottom:-6px}.fg{grid-template-columns:1fr}.mcd{padding:28px 24px 28px 30px}}
-@media(max-width:1000px){.hero2{min-height:70vh;padding:130px 0 100px}}
-@media(max-width:640px){.tt{padding:20px 26px 24px}.hero2{min-height:62vh;padding:120px 0 80px}}
+@media(max-width:1000px){.hero2{min-height:100svh;padding:130px 0 100px}}
+@media(max-width:640px){.tt{padding:20px 26px 24px}.hero2{min-height:100svh;padding:120px 0 80px}}
 @media(prefers-reduced-motion:reduce){
   .tci{transition:none}
   *{animation:none!important;scroll-behavior:auto!important}
@@ -251,41 +262,37 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
   </div>
 </section>
 
-<!--====== THE SIX WEB SERVICES (hover or tap a panel to open it) ======-->
-<section class="sec" style="padding-top:20px">
+<!--====== THE SIX WEB SERVICES (pick one on the left) ======-->
+<section class="sec" style="padding-top:40px">
   <div class="wrap">
-    <div class="rv"><div class="ac" id="ac">
-        <article class="pn on" style="--i:0" tabindex="0">
-          <img src="assets/images/services/Web_Development/Corporate.jpg" alt="Corporate Web Development" loading="lazy">
-          <span class="vt" aria-hidden="true">Corporate Web Development</span>
-          <div class="cap"><h5>Corporate Web Development</h5><p>Elevate your corporate presence with our expert web development. We create tailored websites that embody your brand and streamline functionality. From responsive design to cutting-edge tech integration, we drive professionalism and results.</p></div>
-        </article>
-        <article class="pn" style="--i:1" tabindex="0">
-          <img src="assets/images/services/Web_Development/E-commerce.jpg" alt="E-Commerce Web Development" loading="lazy">
-          <span class="vt" aria-hidden="true">E-Commerce Web Development</span>
-          <div class="cap"><h5>E-Commerce Web Development</h5><p>Empower your online business with our specialized e-commerce web development. Our team creates seamless and captivating online stores that enhance user experiences and drive sales. From intuitive navigation to secure payment gateways, we craft e-commerce solutions that deliver results.</p></div>
-        </article>
-        <article class="pn" style="--i:2" tabindex="0">
-          <img src="assets/images/services/Web_Development/CMS.jpg" alt="CMS Web Development" loading="lazy">
-          <span class="vt" aria-hidden="true">CMS Web Development</span>
-          <div class="cap"><h5>CMS Web Development</h5><p>Unlock easy content management with our CMS web development. We build user-friendly websites that put you in control of your content. With intuitive interfaces and powerful features, managing your online presence has never been more efficient.</p></div>
-        </article>
-        <article class="pn" style="--i:3" tabindex="0">
-          <img src="assets/images/services/Web_Development/Web_portal.jpg" alt="Web Portal Design" loading="lazy">
-          <span class="vt" aria-hidden="true">Web Portal Design</span>
-          <div class="cap"><h5>Web Portal Design</h5><p>Experience seamless navigation and centralized information with our web portal design. We craft intuitive gateways that connect users to resources effortlessly. From user-friendly interfaces to personalized interactions, we create portals that redefine convenience and engagement.</p></div>
-        </article>
-        <article class="pn" style="--i:4" tabindex="0">
-          <img src="assets/images/services/Web_Development/Website-redesign.jpg" alt="Website Redesigning" loading="lazy">
-          <span class="vt" aria-hidden="true">Website Redesigning</span>
-          <div class="cap"><h5>Website Redesigning</h5><p>Revitalize your digital presence with our website redesigning services. We transform outdated websites into modern, engaging platforms that captivate audiences and reflect your brand's evolution. Elevate user experiences and stay ahead in the digital landscape with our expert redesign solutions.</p></div>
-        </article>
-        <article class="pn" style="--i:5" tabindex="0">
-          <img src="assets/images/services/Web_Development/Website-custom-design.jpg" alt="Custom Web Design" loading="lazy">
-          <span class="vt" aria-hidden="true">Custom Web Design</span>
-          <div class="cap"><h5>Custom Web Design</h5><p>Unleash your vision with our custom web design services. We turn your ideas into pixel-perfect realities, creating unique online experiences that resonate with your audience. Our team combines creativity and technical expertise to craft a website that's as distinct as your brand.</p></div>
-        </article>
-    </div></div>
+    <div class="tb rv">
+      <div class="tl" role="tablist">
+        <button class="tab on" role="tab" aria-selected="true">Corporate Web Development<i class="fa fa-angle-right"></i></button>
+        <button class="tab" role="tab" aria-selected="false">E-Commerce Web Development<i class="fa fa-angle-right"></i></button>
+        <button class="tab" role="tab" aria-selected="false">CMS Web Development<i class="fa fa-angle-right"></i></button>
+        <button class="tab" role="tab" aria-selected="false">Web Portal Design<i class="fa fa-angle-right"></i></button>
+        <button class="tab" role="tab" aria-selected="false">Website Redesigning<i class="fa fa-angle-right"></i></button>
+        <button class="tab" role="tab" aria-selected="false">Custom Web Design<i class="fa fa-angle-right"></i></button>
+      </div>
+      <div class="tstage">
+        <div class="tpic"><div class="tframe" id="tframe">
+          <img class="ti on" src="assets/images/services/Web_Development/Corporate.jpg" alt="Corporate Web Development">
+          <img class="ti" src="assets/images/services/Web_Development/E-commerce.jpg" alt="E-Commerce Web Development" loading="lazy">
+          <img class="ti" src="assets/images/services/Web_Development/CMS.jpg" alt="CMS Web Development" loading="lazy">
+          <img class="ti" src="assets/images/services/Web_Development/Web_portal.jpg" alt="Web Portal Design" loading="lazy">
+          <img class="ti" src="assets/images/services/Web_Development/Website-redesign.jpg" alt="Website Redesigning" loading="lazy">
+          <img class="ti" src="assets/images/services/Web_Development/Website-custom-design.jpg" alt="Custom Web Design" loading="lazy">
+        </div></div>
+        <div class="tinfo">
+          <div class="tp on"><h5>Corporate Web Development</h5><p>Elevate your corporate presence with our expert web development. We create tailored websites that embody your brand and streamline functionality. From responsive design to cutting-edge tech integration, we drive professionalism and results.</p></div>
+          <div class="tp"><h5>E-Commerce Web Development</h5><p>Empower your online business with our specialized e-commerce web development. Our team creates seamless and captivating online stores that enhance user experiences and drive sales. From intuitive navigation to secure payment gateways, we craft e-commerce solutions that deliver results.</p></div>
+          <div class="tp"><h5>CMS Web Development</h5><p>Unlock easy content management with our CMS web development. We build user-friendly websites that put you in control of your content. With intuitive interfaces and powerful features, managing your online presence has never been more efficient.</p></div>
+          <div class="tp"><h5>Web Portal Design</h5><p>Experience seamless navigation and centralized information with our web portal design. We craft intuitive gateways that connect users to resources effortlessly. From user-friendly interfaces to personalized interactions, we create portals that redefine convenience and engagement.</p></div>
+          <div class="tp"><h5>Website Redesigning</h5><p>Revitalize your digital presence with our website redesigning services. We transform outdated websites into modern, engaging platforms that captivate audiences and reflect your brand's evolution. Elevate user experiences and stay ahead in the digital landscape with our expert redesign solutions.</p></div>
+          <div class="tp"><h5>Custom Web Design</h5><p>Unleash your vision with our custom web design services. We turn your ideas into pixel-perfect realities, creating unique online experiences that resonate with your audience. Our team combines creativity and technical expertise to craft a website that's as distinct as your brand.</p></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </main>
@@ -302,7 +309,7 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
       <li><a href="contact.php">Contact</a></li>
     </ul>
     <ul class="ad">
-      <li><i class="flaticon-phone-call"></i><p>+91 9042644069</p></li>
+      <li><i class="flaticon-phone-call"></i><p>+91 96007 12716</p></li>
       <li><i class="flaticon-placeholder"></i><div><p>Ettani</p><p>Karungal, 629157</p><p>kanyakumari, Tamilnadu</p></div></li>
       <li><i class="flaticon-email"></i><p>scratchsoftwaresolutions@gmail.com</p></li>
     </ul>
@@ -374,17 +381,32 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
     t.forEach(function(w,i){var s=document.createElement('span');s.className='w';s.textContent=w;p.appendChild(s);if(i<t.length-1)p.appendChild(document.createTextNode(' '));words.push(s)});
   });
 
-  /* service panels: hover (or tap) one to open it, they also cycle on their own */
-  var ac=$('#ac'),pns=$$('.pn'),cur=0,atm;
-  function act(i){cur=i;pns.forEach(function(p,k){p.classList.toggle('on',k===i)});ac.style.setProperty('--a',i)}
-  function auto(){clearInterval(atm);if(!rm)atm=setInterval(function(){act((cur+1)%pns.length)},5200)}
-  pns.forEach(function(p,k){
-    p.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)act(k)});
-    p.addEventListener('click',function(){act(k);auto()});
-    p.addEventListener('focus',function(){act(k)});
+  /* service tabs: one big clear picture, text changes with it */
+  var tabs=$$('.tab'),imgs=$$('.ti'),infos=$$('.tp'),tl=$('.tl'),cur=0,atm;
+  function act(i){
+    if(i===cur)return;
+    imgs.forEach(function(im,k){
+      if(k===i){im.classList.remove('out');im.classList.add('on')}
+      else if(k===cur){im.classList.remove('on');im.classList.add('out')}
+      else{im.classList.remove('on','out')}
+    });
+    tabs.forEach(function(t,k){t.classList.toggle('on',k===i);t.setAttribute('aria-selected',k===i)});
+    infos.forEach(function(p,k){p.classList.toggle('on',k===i)});
+    cur=i;
+    if(innerWidth<=900)tl.scrollTo({left:tabs[i].offsetLeft-16,behavior:'smooth'});
+  }
+  function auto(){clearInterval(atm);if(!rm)atm=setInterval(function(){act((cur+1)%tabs.length)},6000)}
+  tabs.forEach(function(t,k){t.addEventListener('click',function(){act(k);auto()})});
+  var tb=$('.tb');tb.addEventListener('mouseenter',function(){clearInterval(atm)});tb.addEventListener('mouseleave',auto);
+  tb.addEventListener('focusin',function(){clearInterval(atm)});
+  auto();
+  var tp=$('.tpic'),tf=$('#tframe');
+  if(!rm)tp.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    var r=tp.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    tf.style.setProperty('--ry',(x*8).toFixed(2)+'deg');tf.style.setProperty('--rx',(-y*6).toFixed(2)+'deg');
   });
-  ac.addEventListener('mouseenter',function(){clearInterval(atm)});ac.addEventListener('mouseleave',auto);
-  act(0);auto();
+  if(!rm)tp.addEventListener('pointerleave',function(){tf.style.setProperty('--rx','0deg');tf.style.setProperty('--ry','0deg')});
 
   /* tilt following the mouse */  /* tilt following the mouse */
   if(!rm)$$('[data-tilt]').forEach(function(el){
@@ -428,7 +450,7 @@ footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
   if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches){
     var tx=0,ty=0,cx=0,cy=0;
     addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY});
-    document.addEventListener('mouseover',function(e){cu.classList.toggle('big',!!e.target.closest('a,button,input,select,textarea,.pn'))});
+    document.addEventListener('mouseover',function(e){cu.classList.toggle('big',!!e.target.closest('a,button,input,select,textarea,.tab'))});
     (function loop(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cu.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
   }
 

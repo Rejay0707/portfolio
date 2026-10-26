@@ -1,962 +1,483 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="keywords" content="Scratch software solutions" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="author" content="Scratch software solutions" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="keywords" content="Scratch software solutions">
+<meta name="author" content="Scratch software solutions">
+<title>Scratch software solutions</title>
+<link rel="shortcut icon" href="assets/images/normal/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/fonts/flaticon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js'</script>
+<style>
+:root{--b:#0741AE;--b2:#1d62e8;--navy:#04184a;--ink:#0d1b3a;--mut:#51607d;--soft:#eaf0f6;--line:#dbe4f3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}
+:focus-visible{outline:3px solid var(--b2);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+main,footer{position:relative;z-index:1}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.pg{position:fixed;top:0;left:0;right:0;height:3px;z-index:120;background:linear-gradient(90deg,var(--b),var(--b2));transform-origin:left;transform:scaleX(0)}
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid var(--b);border-radius:50%;pointer-events:none;z-index:200;opacity:0;transition:width .25s,height .25s,margin .25s,background .25s,opacity .3s}
+.cur.big{width:68px;height:68px;margin:-34px 0 0 -34px;background:rgba(7,65,174,.12)}
 
-  <!--====== Title ======-->
-  <title>Scratch software solutions</title>
+/* preloader */
+.pre{position:fixed;inset:0;background:#fff;z-index:999;display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+.pre.off{opacity:0;visibility:hidden}
+.pre div{position:relative;width:84px;height:84px;display:grid;place-items:center}
+.pre div::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--soft);border-top-color:var(--b);animation:spin 1s linear infinite}
+.pre img{width:38px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  <!--====== Favicon Icon ======-->
-  <link rel="shortcut icon" href="assets/images/normal/favicon.png" type="image/png" />
+/* header */
+.hd{position:fixed;top:14px;left:0;right:0;z-index:100;transition:top .3s}
+.hd.sc{top:8px}
+.bar{position:relative;isolation:isolate;width:min(1180px,100% - 28px);margin:0 auto;height:68px;padding:0 14px 0 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.bar::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:999px;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);box-shadow:0 12px 36px rgba(7,65,174,.12);transition:.3s}
+.hd.sc .bar::before{background:rgba(255,255,255,.92);box-shadow:0 14px 40px rgba(7,65,174,.2)}
+.logo img{height:42px;width:auto;mix-blend-mode:multiply}
+.menu{display:flex;align-items:center;gap:2px}
+.menu>li{position:relative}
+.menu>li>a{display:block;padding:9px 15px;border-radius:999px;font-weight:600;font-size:15px;transition:.2s}
+.menu>li>a:hover,.menu>li>a.act{background:var(--soft);color:var(--b)}
+.sub{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px;box-shadow:0 24px 50px rgba(7,30,80,.18);opacity:0;visibility:hidden;transform:perspective(700px) rotateX(-12deg) translateY(8px);transform-origin:top;transition:.25s}
+.has:hover .sub,.has:focus-within .sub{opacity:1;visibility:visible;transform:none}
+.sub a{display:block;padding:10px 14px;border-radius:11px;font-size:15px;font-weight:500}
+.sub a:hover{background:var(--soft);color:var(--b)}
+.m-only{display:none}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--b);color:#fff;padding:14px 28px;border-radius:999px;font-weight:700;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s,background .25s}
+.btn:hover{background:var(--b2);transform:translateY(-3px);box-shadow:0 14px 28px rgba(7,65,174,.3)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:18px;cursor:pointer}
 
-  <!--====== Bootstrap css ======-->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <!--====== icofont Icons css ======-->
-  <link rel="stylesheet" href="assets/fonts/flaticon.css" />
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;padding:130px 0 80px;display:flex;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 55% at 80% 40%,rgba(7,65,174,.13),transparent 70%),radial-gradient(40% 40% at 6% 92%,rgba(29,98,232,.1),transparent 70%);pointer-events:none}
+.hg{position:relative;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center}
+.big{font-size:clamp(44px,7vw,92px);font-weight:800;line-height:1.02;letter-spacing:-.04em;margin-bottom:24px}
+.hero p.lt{font-size:clamp(17px,1.7vw,20px);color:var(--mut);max-width:520px}
+.js .a{opacity:0;transform:translateY(34px);animation:up .9s cubic-bezier(.2,.7,.2,1) var(--d) forwards}
+@keyframes up{to{opacity:1;transform:none}}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+/* hero: 3D photo plate with floating badges */
+.hv{position:relative;perspective:1500px;padding:24px 34px 40px}
+.hp{position:relative;transform-style:preserve-3d;transform:rotateX(calc(8deg + var(--rx,0deg))) rotateY(calc(-14deg + var(--ry,0deg)));transition:transform .3s ease-out}
+.hp>img{position:relative;display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px;border:9px solid #fff;box-shadow:0 44px 90px rgba(7,65,174,.32)}
+.hp::before,.hp::after{content:"";position:absolute;inset:0;border-radius:32px;border:2px solid var(--b)}
+.hp::before{transform:translateZ(-60px) translate(28px,28px);opacity:.28;background:rgba(7,65,174,.05)}
+.hp::after{transform:translateZ(-120px) translate(56px,56px);opacity:.14}
+.fb{position:absolute;transform-style:preserve-3d}
+.fbi{width:80px;height:80px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 48px rgba(7,65,174,.26);display:grid;place-items:center;animation:bobc 5s ease-in-out infinite alternate}
+.fbi svg{width:36px;height:36px;fill:none;stroke:var(--b);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fbi i{font-size:30px;color:var(--b)}
+.fbi.av{padding:0;overflow:hidden;border-radius:50%;width:88px;height:88px;border:4px solid #fff}
+.fbi.av img{width:100%;height:100%;object-fit:cover}
+.fb1{left:-6px;top:-12px;transform:translateZ(130px)}
+.fb2{right:-4px;top:52px;transform:translateZ(170px)}.fb2 .fbi{animation-delay:-1.6s}
+.fb3{right:60px;bottom:-12px;transform:translateZ(110px)}.fb3 .fbi{animation-delay:-3s}
+@keyframes bobc{from{transform:translateY(-8px)}to{transform:translateY(10px)}}
 
-  <!--====== Slick slider CSS ======-->
-  <link rel="stylesheet" href="assets/css/slick.css" />
-  <!--====== animate CSS ======-->
-  <link rel="stylesheet" href="assets/css/animate.css" />
+/* shared */
+.sec{padding:120px 0}
+.st{text-align:center;margin-bottom:56px}
+.st h3{font-size:clamp(32px,4.6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.12;display:inline-block;perspective:700px}
+.st h3 .ch{display:inline-block;transform-origin:50% 100%}
+.st::after{content:"";display:block;width:84px;height:4px;border-radius:4px;background:var(--b);margin:20px auto 0}
+.js .st h3 .ch{opacity:0;transform:translateY(40%) rotateX(-95deg)}
+.js .st.in h3 .ch{opacity:1;transform:none;transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .st::after{transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.7,.2,1) .5s}
+.js .st.in::after{transform:scaleX(1)}
+.js .rv{opacity:0;transform:perspective(1000px) translateY(46px) rotateX(18deg) translateZ(-90px)}
+.js .rv.in{opacity:1;transform:perspective(1000px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .rv.r{transform:perspective(1000px) translateX(60px) rotateY(-16deg) translateZ(-90px)}
+.js .rv.r.in{transform:perspective(1000px)}
+.js .fd{opacity:0;transition:opacity 1s ease}.js .fd.in{opacity:1}
+.t3{transform-style:preserve-3d}
+.js .t3.done{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.js .t3.done.tl{transition:transform .1s linear,box-shadow .35s}
 
-  <!--====== Default css ======-->
-  <link rel="stylesheet" href="assets/css/default.css" />
+/* hero: the banner photo fills the whole background, untouched */
+.hero2{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:140px 0 130px;background:#dfe7f5;overflow:hidden}
+.hbg{position:absolute;inset:-5%;background:url("assets/images/services/website-maintanance/maintanance-banner.jpg") center/cover no-repeat;transform:translate3d(var(--bx,0px),calc(var(--by,0px) + var(--sy,0px)),0) scale(1.04);transition:transform .35s ease-out;will-change:transform}
+.hero2 .wrap{position:relative;z-index:2;perspective:1200px;display:flex;justify-content:center}
+.tt{display:inline-block;text-align:center;max-width:920px;padding:26px 52px 30px;border-radius:32px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.75);box-shadow:0 34px 80px rgba(4,24,74,.28);transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out}
+.tt .big{margin:0;font-size:clamp(30px,4.6vw,62px);line-height:1.12}
+.tt::after{content:"";display:block;width:84px;height:5px;border-radius:5px;background:var(--b);margin:16px auto 0}
 
-  <!--====== Style css ======-->
-  <link rel="stylesheet" href="assets/css/style.css" />
+/* intro: words light up as you scroll */
+.why-p{max-width:1000px;margin:0 auto;font-size:clamp(22px,3.1vw,38px);font-weight:700;line-height:1.45;letter-spacing:-.02em;text-align:center;transform-origin:50% 100%;will-change:transform}
+.why-p p+p{margin-top:34px}
+.js .why-p .w{color:rgba(13,27,58,.16);transition:color .45s}
+.js .why-p .w.lit{color:var(--ink)}
 
-  <link rel="stylesheet" href="css/style2.css" />
+/* portfolio: browser-window project cards in sliding rails */
+.pf{margin-bottom:84px}
+.pfh{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pfi{flex:none;width:58px;height:58px;border-radius:18px;background:var(--b);color:#fff;display:grid;place-items:center;font-size:24px;box-shadow:0 16px 30px rgba(7,65,174,.36)}
+.pfh h3{font-size:clamp(28px,3.6vw,44px);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.15}
+.pfc{padding:6px 15px;border-radius:999px;background:var(--soft);color:var(--b);font-size:14px;font-weight:700}
+.rbtns{margin-left:auto;display:flex;gap:10px}
+.rbtn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--b);font-size:20px;cursor:pointer;transition:.25s}
+.rbtn:hover{background:var(--b);color:#fff;transform:scale(1.08)}
+.rtrack{display:flex;gap:32px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:34px 6px 56px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rtrack::-webkit-scrollbar{display:none}
+.rtrack>.pc:first-child{margin-left:auto}
+.rtrack>.pc:last-child{margin-right:auto}
+.pc{flex:0 0 var(--w,640px);max-width:88vw;scroll-snap-align:center;cursor:default}
+.pc[data-video]{cursor:pointer}
+.bw{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 32px 70px rgba(7,65,174,.2);transition:box-shadow .35s}
+.pc:hover .bw{box-shadow:0 44px 90px rgba(7,65,174,.3)}
+.bb{display:flex;gap:7px;align-items:center;padding:14px 18px;background:linear-gradient(#f5f8fd,var(--soft));border-bottom:1px solid var(--line)}
+.bb i{width:11px;height:11px;border-radius:50%;background:#bcd0f3}
+.bb i:first-child{background:var(--b)}
+.bs{position:relative;aspect-ratio:var(--ar,16/10);overflow:hidden;background:var(--soft)}
+.bs img,.bs video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left}
+.bs video{opacity:0;transition:opacity .35s}
+.pc.playing .bs video{opacity:1}
+.plb{position:absolute;right:18px;bottom:18px;width:54px;height:54px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;font-size:18px;padding-left:3px;box-shadow:0 14px 28px rgba(7,65,174,.45);opacity:0;transform:scale(.85);transition:.3s;pointer-events:none}
+.pc[data-video]:hover .plb,.pc[data-video]:focus-visible .plb{opacity:1;transform:none}
+@media(hover:none){.plb{opacity:1;transform:none}}
+.pm{padding:22px 6px 0}
+.pm h4{font-size:23px;font-weight:800;color:var(--b);line-height:1.25;margin-bottom:10px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{padding:6px 14px;border-radius:999px;background:var(--soft);color:var(--b);font-size:13.5px;font-weight:700}
+.vm{position:fixed;inset:0;z-index:400;background:rgba(4,14,40,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.vm.open{display:flex}
+.vmb{position:relative;width:100%;max-width:1100px}
+.vm video{display:block;width:100%;max-height:84vh;background:#000;border-radius:20px;border:6px solid #fff;box-shadow:0 40px 90px rgba(0,0,0,.5)}
+.vmx{position:absolute;top:-56px;right:0;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer;display:grid;place-items:center;transition:.25s}
+.vmx:hover{background:#fff;color:var(--b)}
+@media(max-width:700px){.pc{flex-basis:86vw}.pf{margin-bottom:56px}.rbtn{width:42px;height:42px}}
+.hero2+.sec{padding-top:72px}
 
-  <style>
-    .breadcrumbs_section::before {
-      background-color: rgba(255, 255, 255, 0) !important;
-    }
+/* footer */
+footer{background:#071433;color:#b7c5e6;padding:80px 0 0;font-size:15px}
+.fg{display:grid;grid-template-columns:1.3fr .8fr 1.3fr 1.3fr;gap:44px;padding-bottom:56px}
+.fg img{width:70%;max-width:230px}.fg ul{display:grid;gap:11px}.fg a:hover{color:#fff}
+.fg .ad li{display:flex;gap:14px;align-items:flex-start}.fg .ad i{color:#7aa5ff;margin-top:4px;width:18px}.fg .ad p{line-height:1.55}
+.sci{display:flex;gap:10px;margin-top:24px}
+.sci a{width:44px;height:44px;border-radius:50%;border:1px solid #2a3b6b;display:grid;place-items:center;color:#fff;transition:.25s}
+.sci a:hover{background:var(--b);border-color:var(--b);transform:translateY(-4px) scale(1.1)}
+.copyr{border-top:1px solid #1b2a52;padding:22px 20px;width:100%}
+.copyr p{margin:0;width:100%;text-align:center!important;color:#b7c5e6;font-size:15px;line-height:1.6}
+.copyr a{color:#fff;font-weight:600}
+.top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0));width:48px;height:48px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 12px 26px rgba(7,30,80,.35);z-index:90}
+.top.show{opacity:1;pointer-events:auto}
 
-    #back1 {
-      background: url("assets/images/services/website-maintanance/maintanance-banner.jpg") !important;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      position: relative;
-      padding: 14.5rem;
-      /* height: 613px !important; */
-      background-size: cover !important;
-    }
-
-    @media (max-width:980px) {
-      #back1 {
-        padding: 10rem
-      }
-    }
-
-    @media (max-width:676px) {
-      #back1 {
-        padding: 7rem
-      }
-    }
-
-    #box {
-      position: relative;
-    }
-
-    #box2::before {
-      /* position: absolute;
-            content: "";
-            left: 0 !important;
-            bottom: -30px !important;
-            height: 300px;
-            width: 100%;
-            background: url('/assets/images/normal/background.png') !important;
-            background-repeat: no-repeat !important;
-            z-index: -1; */
-      position: absolute;
-      content: "";
-      left: 0 !important;
-      bottom: -5px;
-      height: 100%;
-      width: 100%;
-      background: url("/assets/images/normal/circle_chooing.svg") no-repeat left bottom !important;
-      z-index: -1;
-    }
-
-    .blog-post-area .blog-card:hover .blog-image img {
-      -webkit-transform: scale(1.2) !important;
-      -moz-transform: scale(1.2) !important;
-      -ms-transform: scale(1.2) !important;
-      -o-transform: scale(1.2) !important;
-      transform: scale(1.2) !important;
-      -webkit-transition: all 0.5s ease-out 0s;
-      -moz-transition: all 0.5s ease-out 0s;
-      -ms-transition: all 0.5s ease-out 0s;
-      -o-transition: all 0.5s ease-out 0s;
-      transition: all 0.5s ease-out 0s;
-    }
-
-    .blog-post-area .blog-card .blog-content:hover {
-      /* background-color: rgba(23, 85, 255, 0.568); */
-      background-color: #5f7abe;
-
-      .blog-title,
-      .blog-para {
-        color: white;
-      }
-    }
-
-    .blog-post-area .blog-card {
-      padding: 0px !important;
-    }
-
-    .header-menu-area.sticky {
-      background-color: white !important;
-      padding: 7px 0 !important;
-    }
-
-    #portfolio__Sec_2 {
-      margin-top: 5rem !important;
-    }
-
-    .Heading__space {
-      margin-bottom: 2rem;
-    }
-
-    /* ===== Video hover + equal card sizes ===== */
-
-    /* Same shape for every portfolio card (matches 1.jpg: about 392 x 380) */
-    .single-case-studies figure {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 392 / 380;
-    }
-
-    .single-case-studies figure img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top left;
-    }
-
-    /* Video sits on top of the image and fades in on hover */
-    .video-hover .hover-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top left;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .video-hover.playing .hover-video { opacity: 1; }
-
-    /* Wide card for Native Crunch (static row, second card) */
-.wide-card .single-case-studies figure {
-  aspect-ratio: 1918 / 944;
+@media(hover:hover) and (pointer:fine){.js .cur{opacity:1}}
+@media(max-width:1000px){
+  .burger{display:block;position:relative;z-index:130}.cta{display:none}.m-only{display:block}
+  .menu-open .logo{position:relative;z-index:130}
+  body.menu-open{overflow:hidden}
+  .menu{position:fixed;inset:0;z-index:125;background:#fff;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:96px 24px calc(28px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
+  .menu-open .menu{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .menu>li{width:100%;border-bottom:1px solid var(--line);opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}
+  .menu-open .menu>li{opacity:1;transform:none}
+  .menu-open .menu>li:nth-child(1){transition-delay:.12s}.menu-open .menu>li:nth-child(2){transition-delay:.17s}.menu-open .menu>li:nth-child(3){transition-delay:.22s}.menu-open .menu>li:nth-child(4){transition-delay:.27s}.menu-open .menu>li:nth-child(5){transition-delay:.32s}.menu-open .menu>li:nth-child(6){transition-delay:.37s}.menu-open .menu>li:nth-child(7){transition-delay:.42s}
+  .menu>li:not(.m-only)>a{display:flex;align-items:center;justify-content:space-between;padding:17px 4px;font-size:19px;font-weight:700;border-radius:0}
+  .menu>li:not(.m-only)>a:hover,.menu>li:not(.m-only)>a.act{background:none;color:var(--b)}
+  .has>a::after{content:"\f107";font-family:FontAwesome;font-weight:400;font-size:22px;color:var(--b);transition:transform .3s}
+  .has.open>a::after{transform:rotate(180deg)}
+  .sub{position:static;display:block;min-width:0;max-height:0;overflow:hidden;opacity:1;visibility:visible;transform:none;background:none;border:0;border-radius:0;box-shadow:none;padding:0 0 0 6px;transition:max-height .45s ease}
+  .has.open .sub{max-height:640px;padding-bottom:12px}
+  .sub a{padding:12px 14px;font-size:16px;font-weight:500;color:var(--mut);border-left:2px solid var(--line);border-radius:0}
+  .sub a:hover{background:none;color:var(--b);border-left-color:var(--b)}
+  .menu>li.m-only{border:0;margin-top:auto;padding-top:26px}
+  .menu .m-only .btn{display:flex;width:100%;justify-content:center;padding:16px 24px;font-size:16px;color:#fff}
+  .hg,.mg{grid-template-columns:1fr;gap:40px}.hero{padding-top:110px}
+  .ml{position:static}
+  .fg{grid-template-columns:1fr 1fr}.sec{padding:84px 0}
 }
-
-.wide-card .single-case-studies figure img,
-.wide-card .video-hover .hover-video {
-  object-fit: cover;
-  object-position: center top;
+@media(max-width:820px){
+  .mc{position:relative;top:auto;transform:none!important;margin-bottom:22px}
+  .mi{grid-template-columns:1fr;gap:20px;padding:32px 26px 32px 32px}.bgi{width:76px;height:76px}
 }
-
-/* Video popup */
-.video-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 99999;
+@media(max-width:640px){.hv{padding:12px 16px 30px}.fbi{width:56px;height:56px;border-radius:18px}.fbi.av{width:60px;height:60px;border-radius:50%}.fbi svg{width:26px;height:26px}.fbi i{font-size:22px}.fb1{left:-2px;top:-6px}.fb2{right:0;top:36px}.fb3{right:30px;bottom:-6px}.fg{grid-template-columns:1fr}.mcd{padding:28px 24px 28px 30px}}
+@media(max-width:1000px){.hero2{min-height:100svh;padding:130px 0 100px}}
+@media(max-width:640px){.tt{padding:20px 26px 24px}.hero2{min-height:100svh;padding:120px 0 80px}}
+@media(prefers-reduced-motion:reduce){
+  .tci{transition:none}
+  *{animation:none!important;scroll-behavior:auto!important}
+  .js .rv,.js .st h3 .ch,.js .st::after,.js .a,.js .fd{opacity:1!important;transform:none!important;transition:none!important}
+  .js .why-p .w{color:var(--ink)}
+  .mc{transform:none!important}
 }
-
-.video-modal.open { display: flex; }
-
-.video-modal-box {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-}
-
-.video-modal video {
-  display: block;
-  width: 100%;
-  max-height: 85vh;
-  background: #000;
-  border-radius: 8px;
-}
-
-.video-modal-close {
-  position: absolute;
-  top: -44px;
-  right: 0;
-  background: none;
-  border: 0;
-  color: #fff;
-  font-size: 38px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-/* Static websites carousel */
-.static-carousel { position: relative; }
-
-.sc-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.sc-item {
-  flex: 0 0 26%;
-  scroll-snap-align: start;
-}
-.sc-item.wide-card { flex: 0 0 52%; }
-
-
-.sc-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px; height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 5;
-}
-.sc-btn:hover { background: #5f7abe; }
-.sc-prev { left: -10px; }
-.sc-next { right: -10px; }
-
-@media (max-width: 991px) {
-  .sc-item,
-  .sc-item.wide-card { flex: 0 0 80%; }
-}
-  </style>
+</style>
 </head>
-
 <body>
-  <!--====== PRELOADER PART START ======-->
 
-  <div class="gridtemplate-loader">
-    <div class="preloader">
-      <div class="spinner"></div>
-      <img class="preload-logo" src="assets/images/normal/favicon.png" />
-    </div>
+<div class="pre"><div><img src="assets/images/normal/favicon.png" alt=""></div></div>
+<div class="pg" id="pg"></div>
+<div class="cur" id="cur"></div>
+
+<!--====== HEADER ======-->
+<header class="hd">
+  <div class="bar">
+    <a class="logo" href="index.html"><img src="assets/images/normal/122.jpg" alt="Logo"></a>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="has"><a href="about.html">About Us</a>
+        <ul class="sub">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="our_team.html">Our Team</a></li>
+          <li><a href="CEO_Message.html">CEO Message</a></li>
+        </ul>
+      </li>
+      <li class="has"><a href="services.html">Services</a>
+        <ul class="sub">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="Web_Design_And_Web_Development.html">Web Design And Web Development</a></li>
+          <li><a href="App_Development.html">App Development</a></li>
+          <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting Support</a></li>
+          <li><a href="Enterprise_Software_Development.html">Enterprise Software Development</a></li>
+          <li><a href="Creative_Services.html">Creative Services</a></li>
+          <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
+        </ul>
+      </li>
+      <li><a href="blog_page.html">Events</a></li>
+      <li><a href="potfolio.html" class="act">Portfolio</a></li>
+      <li><a href="contact.php">Contact</a></li>
+      <li class="m-only"><a class="btn" href="contact.php#contact" style="color:#fff;justify-content:center;margin-top:14px">Get a Quote</a></li>
+    </ul>
+    <a class="btn cta" href="contact.php#contact">Get a Quote</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><i class="fa fa-bars"></i></button>
   </div>
+</header>
 
-  <!--====== PRELOADER PART ENDS ======-->
-
-  <!--====== HEADER PART START ======-->
-
-  <header class="header-area">
-    <div class="header-menu-area d-none d-lg-block"
-      style="background-color: rgb(0 0 0 / 50%); padding: 0px 0px 22px 0px">
-      <div class="header-main-menu">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-2">
-              <div class="menu-logo">
-                <a class="logo" href="index.html">
-                  <img src="assets/images/normal/162x55.png" class="white-logo" alt="Logo">
-                  <img src="assets/images/normal/122.jpg" class="light-logo" alt="Logo">
-
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-8 d-flex justify-content-center">
-              <div class="navbar-menu">
-                <ul class="">
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="about.html">About Us</a>
-                  
-                   <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="our_team.html">Our Team</a></li>
-                                          <li><a href="CEO_Message.html">CEO Message</a></li>
-                                        </ul>
-                  
-                  
-                  
-                  
-                  </li>
-                  <li><a href="services.html">Services <i class="flaticon-add-1"></i></a>
-                    <ul class="sub-menu">
-                         <li><a href="services.html">Services</a></li>
-                      <li><a href="Web_Design_And_Web_Development.html">Web Design And Web
-                          Development</a></li>
-                      <li><a href="App_Development.html">App Development</a></li>
-                      <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting
-                          Support</a></li>
-                      <li><a href="Enterprise_Software_Development.html">Enterprise Software
-                          Development</a></li>
-                      <li><a href="Creative_Services.html">Creative Services</a></li>
-                      <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
-</nav>
-                    </ul>
-                  </li>
-                  <li><a href="blog_page.html">Events</a></li>
-                  <li><a href="potfolio.html" class="active">Portfolio</a></li>
-
-                  <li><a href="contact.php">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-2 text-lg-end">
-              <div class="button">
-                <a class="btn main-btn mouse-hover" href="contact.php#contact" style="padding: 17px 0px 0px 0px">Get a
-                  Quote<span></span></a>
-              </div>
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
-      </div>
-    </div>
-    <!-- header menu area -->
-
-    <div class="header-mobile-menu d-lg-none">
-      <div class="container">
-        <div class="mobile-menu d-flex justify-content-between align-items-center">
-          <div class="menu-bar">
-            <a class="mobile-menu-open" href="javascript:void(0)"><i class="flaticon-menu"></i></a>
-          </div>
-          <div class="mobile-logo">
-            <a href="index.html"><img src="assets/images/normal/122.jpg" class="light-logo" alt="Logo" /></a>
-          </div>
-          <!-- mobile logo -->
-        </div>
-        <!-- mobile menu -->
-      </div>
-      <!-- container -->
-    </div>
-    <!-- header mobile menu -->
-
-    <div id="home" class="header_hero">
-      <div class="container-fluid px-0"></div>
-      <!-- container -->
-    </div>
-    <!-- header hero -->
-  </header>
-
-  <!--====== HEADER PART ENDS ======-->
-
-  <!--====== BREADCRUMB PART START ======-->
-  <section class="breadcrumbs_section" id="back1">
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-lg-6 col-md-6 col-12">
-            <div class="breadcrumbs-content left">
-              <pre></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--====== BREADCRUMB PART END ======-->
-
-  <!--====== OFFCANVAS MOBILE MENU PART START ======-->
-
-  <div class="offcanvas-menu-wrapper mobile-menu-style2">
-    <div class="offcanvas-menu">
-      <a class="close-mobile-menu" href="javascript:void(0)"><i class="flaticon-x-mark"></i></a>
-
-      <div class="mobile-menu pt-30">
-     <nav>
-                    <ul>
-
-                        <li><a href="index.html">Home</a></li>
-
-                       <li>
-                      <li class="menu-item-has-children"><a href="about.html" class="active">About Us</a>
-
-                      <ul class="sub-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="our_team.html">Our Team</a></li>
-                        <li><a href="CEO_Message.html">CEO Message</a></li>
-                      </ul>
-                    </li>
-
-                        <li class="menu-item-has-children"><a href="services.html">Services</a>
-                            <ul class="sub-menu">
-                                <li><a href="Web_Design_And_Web_Development.html">Web Design And Web Development</a>
-                                </li>
-                                <li><a href="App_Development.html">App Development</a></li>
-                                <li><a href="Website_Maintanance_Hosting.html">Website Maintanance/Hosting Support</a>
-                                </li>
-                                <li><a href="Enterprise_Software_Development.html">Enterprise Software Development</a>
-                                </li>
-                                <li><a href="Creative_Services.html">Creative Services</a></li>
-                                <li><a href="Digital_Marketinghtml.html">Digital Marketing</a></li>
-
-
-                            </ul>
-                        </li>
-                        <li><a href="blog_page.html">Events</a></li>
-                        <li><a href="potfolio.html">Portfolio</a></li>
-                        <li><a href="contact.php">Contact</a></li>
-                    </ul>
-                </nav>
-      </div>
-    </div>
-    <div class="overlay"></div>
-  </div>
-
-  <!--====== OFFCANVAS MOBILE MENU PART START ======-->
-
-  <!--====== WHY CHOOSING PART START ======-->
-
-  <!--====== CUSTOMER SERVICES SART PART START ======-->
-
-  <section class="recent_case_area">
-    <div class="container">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-lg-10">
-          <div class="section-title text-center">
-            <br /><br />
-            <h3 class="title">Our Portfolio</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-  <h2 class="Heading__space">Static Websites</h2>
-
-  <div class="col-12">
-    <div class="static-carousel">
-      <button class="sc-btn sc-prev" type="button" aria-label="Previous">&#10094;</button>
-
-      <div class="sc-track">
-
-        <!-- Card 1 -->
-        <div class="sc-item">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/1.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 2: TUV -->
-        <div class="sc-item wide-card">
-          <div class="single-case-studies text-center">
-            <a href="#" class="video-hover" data-video="assets/videos/static/TUV.mp4">
-              <figure>
-                <img class="img-fluid" src="assets/images/static/TUV.png" alt="Technical United Vision" />
-                <video class="hover-video" muted loop playsinline preload="metadata"
-                       poster="assets/images/static/TUV.png">
-                  <source src="assets/videos/static/TUV.mp4" type="video/mp4" />
-                </video>
-                <figcaption>
-                  <div class="hover-info">
-                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 3: MIQYASS -->
-        <div class="sc-item wide-card">
-          <div class="single-case-studies text-center">
-            <a href="#" class="video-hover" data-video="assets/videos/static/MIQYASS.mp4">
-              <figure>
-                <img class="img-fluid" src="assets/images/static/MIQYASS.png" alt="MIQYASS" />
-                <video class="hover-video" muted loop playsinline preload="metadata"
-                       poster="assets/images/static/MIQYASS.png">
-                  <source src="assets/videos/static/MIQYASS.mp4" type="video/mp4" />
-                </video>
-                <figcaption>
-                  <div class="hover-info">
-                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div>
-
-
-      </div>
-
-      <button class="sc-btn sc-next" type="button" aria-label="Next">&#10095;</button>
-    </div>
-  </div>
-</div>
-      
-      <div class="row" id="portfolio__Sec_2">
-        <h2 class="Heading__space">E-Commerce Websites</h2>
-        <div class="col-lg-8 col-md-12 col-12 wide-card" style="padding: 0 1.5rem;">
-  <div class="single-case-studies text-center">
-    <a href="#" class="video-hover" data-video="assets/videos/native-crunch-1.mp4">
-      <figure>
-        <img class="img-fluid" src="assets/native-crunch.png" alt="Native Crunch" />
-        <video class="hover-video" muted loop playsinline preload="metadata"
-               poster="assets/images/case/2.jpg">
-          <source src="assets/videos/native-crunch-1.mp4" type="video/mp4" />
-        </video>
-        <figcaption>
-          <div class="hover-info">
-            <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-          </div>
-        </figcaption>
-      </figure>
-    </a>
-  </div>
-</div>
-        
-        <!-- <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/5.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <h5>CRM Portal</h5>
-                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div> -->
-        <!-- <div class="col-lg-4 col-md-6 col-12">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/6.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <h5>Portfolio 3</h5>
-                    <span>Template</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div> -->
-      </div>
-
-                  <div class="row" style="margin-top: 5rem;">
-        <h2 class="Heading__space">Dynamic Websites</h2>
-
-        <div class="col-12">
-          <div class="static-carousel">
-            <button class="sc-btn sc-prev" type="button" aria-label="Previous">&#10094;</button>
-
-            <div class="sc-track">
-
-              <!-- ISHA -->
-              <div class="sc-item wide-card">
-                <div class="single-case-studies text-center">
-                  <a href="#" class="video-hover" data-video="assets/videos/static/ISHA.mp4">
-                    <figure>
-                      <img class="img-fluid" src="assets/images/static/ISHA.png" alt="ISHA" />
-                      <video class="hover-video" muted loop playsinline preload="metadata"
-                             poster="assets/images/static/ISHA.png">
-                        <source src="assets/videos/static/ISHA.mp4" type="video/mp4" />
-                      </video>
-                      <figcaption>
-                        <div class="hover-info">
-                          <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Equipride -->
-              <div class="sc-item wide-card">
-                <div class="single-case-studies text-center">
-                  <a href="#" class="video-hover" data-video="assets/videos/dynamic/Equipride.mp4">
-                    <figure>
-                      <img class="img-fluid" src="assets/images/dynamic/Equipride.png" alt="Equipride" />
-                      <video class="hover-video" muted loop playsinline preload="metadata"
-                             poster="assets/images/dynamic/Equipride.png">
-                        <source src="assets/videos/dynamic/Equipride.mp4" type="video/mp4" />
-                      </video>
-                      <figcaption>
-                        <div class="hover-info">
-                          <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Add more .sc-item blocks here; the row scrolls automatically -->
-
-            </div>
-
-            <button class="sc-btn sc-next" type="button" aria-label="Next">&#10095;</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" id="portfolio__Sec_2">
-        <h2 class="Heading__space"> CRM Web Portal</h2>
-        <!-- <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/3.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <h5>Dynamic Website</h5>
-                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/4.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <h5>Dynamic Website</h5>
-                    <span>HTML,CSS,Bootstrap, javascript, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div> -->
-        <div class="col-lg-4 col-md-6 col-12" style="padding: 0 1.5rem;">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/5.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-
-                    <span>HTML, CSS, Bootstrap, javascript, Jquery, PHP</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div>
-        <!-- <div class="col-lg-4 col-md-6 col-12">
-          <div class="single-case-studies text-center">
-            <a href="#">
-              <figure>
-                <img class="img-fluid" src="assets/images/case/6.jpg" />
-                <figcaption>
-                  <div class="hover-info">
-                    <h5>Portfolio 3</h5>
-                    <span>Template</span>
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </div> -->
-      </div>
-    </div>
-  </section>
-
-  <!--====== CUSTOMER SERVICES SART PART ENDS ======-->
-
-  <!--====== FOOTER PART START ======-->
-
-  <footer class="footer-area">
-    <div class="footer-widget pt-100 pb-80">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="footer-address pt-35">
-              <ul>
-                <li>
-                  <div class="footer-logo">
-                    <img src="assets/images/normal/162x55.png" class="img-fluid" alt="Logo" style="width: 70%" />
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!-- footer address -->
-          </div>
-
-          <div class="col-lg-2 col-md-6 col-sm-6">
-            <div class="footer-link pt-35">
-              <ul>
-                <li>
-                  <a href="index.html"><i class="icofont-rounded-right"></i>Home</a>
-                </li>
-                <li>
-                  <a href="about.html"><i class="icofont-rounded-right"></i>About Us</a>
-                </li>
-                <li>
-                  <a href="services.html"><i class="icofont-rounded-right"></i>Services</a>
-                </li>
-                <li>
-                  <a href="potfolio.html"><i class="icofont-rounded-right"></i>Portfolio</a>
-                </li>
-                <li>
-                  <a href="contact.php"><i class="icofont-rounded-right"></i>Contact</a>
-                </li>
-              </ul>
-            </div>
-            <!-- footer link -->
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-instagram pt-35">
-              <div class="footer-address pt-35">
-                <ul>
-                  <li>
-                    <div class="single-address py-2 d-flex">
-                      <div class="address-icon">
-                        <i class="flaticon-phone-call"></i>
-                      </div>
-                      <div class="address-content media-body">
-                        <p class="text">+91 9042644069</p>
-                      </div>
-                    </div>
-                    <!-- single address -->
-                  </li>
-                  <li>
-                    <div class="single-address d-flex">
-                      <div class="address-icon">
-                        <i class="flaticon-placeholder"></i>
-                      </div>
-                      <div class="address-content media-body">
-                        <p class="text">Ettani</p>
-                        <p class="text">Karungal, 629157</p>
-                        <p class="text">kanyakumari, Tamilnadu</p>
-                      </div>
-                    </div>
-                    <!-- single address -->
-                  </li>
-                  <li>
-                    <div class="single-address d-flex">
-                      <div class="address-icon">
-                        <i class="flaticon-email"></i>
-                      </div>
-                      <div class="address-content media-body">
-                        <p class="text">info@scratchsoftwaresolutions.com</p>
-                      </div>
-                    </div>
-                    <!-- single address -->
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- footer Instagram Feeds
- -->
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-link pt-35">
-              <div class="email-sub-content pt-20 pb-50">
-                <p>
-                  Contact us today to embark on an exciting journey of digital
-                  transformation. to life
-                </p>
-              </div>
-
-              <div class="social-icons">
-                <ul>
-                  <li style="display: inline">
-                    <a href="https://www.facebook.com/people/Scratch-Software-Solutions/100094091524895/?mibextid=ZbWKwL"
-                      style="padding: 15px !important" target="_blank"><i
-                        class="flaticon-facebook-circular-logo"></i></a>
-                  </li>
-                  <li style="display: inline">
-                    <a href="https://instagram.com/scratchsoftwaresolutions?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D"
-                      style="padding: 15px !important" target="_blank"><i class="flaticon-instagram"></i></a>
-                  </li>
-                  <li style="display: inline">
-                    <a href="#" style="padding: 15px !important" margin-bottom="10px" target="_blank"><i
-                        class="fa fa-linkedin-square"></i></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- footer link -->
-          </div>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </div>
-    <!-- footer widget -->
-
-    <div class="footer-copyright pt-10 pb-20">
-      <div class="container">
-        <div class="copyright text-center pt-10">
-          <p class="pt-2 text">
-            All copyrights reserved © 2023 - Designed & Developed by
-            <a href="https://scratchsoftwaresolutions.com/">Scratch Software Solutions</a>
-          </p>
-        </div>
-        <!-- copyright -->
-        <div class="footer-bottom text-center pt-15">
-          <!-- payment -->
-        </div>
-        <!-- copyright payment -->
-      </div>
-      <!-- container -->
-    </div>
-    <!-- footer copyright -->
-  </footer>
-
-  <!--====== FOOTER PART ENDS ======-->
-
-  <!--====== BACK TOP TOP PART START ======-->
-
-  <a href="#" class="back-to-top back-blue"><i class="flaticon-up-arrow"></i></a>
-
-  <!--====== BACK TOP TOP PART ENDS ======-->
-
-  <!-- Video popup -->
-<div class="video-modal" id="videoModal">
-  <div class="video-modal-box">
-    <button class="video-modal-close" id="videoModalClose" aria-label="Close">&times;</button>
-    <video id="modalVideo" controls playsinline></video>
+<main>
+<!--====== HERO: banner photo as the full background ======-->
+<div class="hero2" id="back1">
+  <div class="hbg" id="hbg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="a" style="--d:.2s"><div class="tt" id="tilt"><h1 class="big">Our Portfolio</h1></div></div>
   </div>
 </div>
 
-  <!--====== jquery js ======-->
-  <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-  <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+<!--====== OUR PORTFOLIO ======-->
+<section class="sec">
+  <div class="wrap">
+    <div class="pf">
+      <div class="pfh rv"><span class="pfi"><i class="fa fa-file-code-o"></i></span><h3>Static Websites</h3><span class="pfc">3 projects</span>
+        <div class="rbtns"><button class="rbtn rprev" type="button" aria-label="Previous"><i class="fa fa-angle-left"></i></button><button class="rbtn rnext" type="button" aria-label="Next"><i class="fa fa-angle-right"></i></button></div>
+      </div>
+      <div class="rtrack rv">
+        <article class="pc t3 done" data-tilt="3" style="--ar:392/380;--w:400px">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/case/1.jpg" alt="Static website project" loading="lazy"></div></div>
+          <div class="pm"><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+        <article class="pc t3 done" data-tilt="3" style="--ar:1918/944;--w:640px" data-video="assets/videos/static/TUV.mp4" tabindex="0">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/static/TUV.png" alt="Technical United Vision" loading="lazy"><video muted loop playsinline preload="metadata" poster="assets/images/static/TUV.png"><source src="assets/videos/static/TUV.mp4" type="video/mp4"></video><span class="plb"><i class="fa fa-play"></i></span></div></div>
+          <div class="pm"><h4>Technical United Vision</h4><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+        <article class="pc t3 done" data-tilt="3" style="--ar:1918/944;--w:640px" data-video="assets/videos/static/MIQYASS.mp4" tabindex="0">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/static/MIQYASS.png" alt="MIQYASS" loading="lazy"><video muted loop playsinline preload="metadata" poster="assets/images/static/MIQYASS.png"><source src="assets/videos/static/MIQYASS.mp4" type="video/mp4"></video><span class="plb"><i class="fa fa-play"></i></span></div></div>
+          <div class="pm"><h4>MIQYASS</h4><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="pf">
+      <div class="pfh rv"><span class="pfi"><i class="fa fa-shopping-cart"></i></span><h3>E-Commerce Websites</h3><span class="pfc">1 project</span>
+        <div class="rbtns"><button class="rbtn rprev" type="button" aria-label="Previous"><i class="fa fa-angle-left"></i></button><button class="rbtn rnext" type="button" aria-label="Next"><i class="fa fa-angle-right"></i></button></div>
+      </div>
+      <div class="rtrack rv">
+        <article class="pc t3 done" data-tilt="3" style="--ar:1918/944;--w:640px" data-video="assets/videos/native-crunch-1.mp4" tabindex="0">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/native-crunch.png" alt="Native Crunch" loading="lazy"><video muted loop playsinline preload="metadata" poster="assets/images/case/2.jpg"><source src="assets/videos/native-crunch-1.mp4" type="video/mp4"></video><span class="plb"><i class="fa fa-play"></i></span></div></div>
+          <div class="pm"><h4>Native Crunch</h4><div class="tags"><span>HTML</span><span>CSS</span><span>Tailwind</span><span>javascript</span><span>React</span><span>PHP</span></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="pf">
+      <div class="pfh rv"><span class="pfi"><i class="fa fa-database"></i></span><h3>Dynamic Websites</h3><span class="pfc">2 projects</span>
+        <div class="rbtns"><button class="rbtn rprev" type="button" aria-label="Previous"><i class="fa fa-angle-left"></i></button><button class="rbtn rnext" type="button" aria-label="Next"><i class="fa fa-angle-right"></i></button></div>
+      </div>
+      <div class="rtrack rv">
+        <article class="pc t3 done" data-tilt="3" style="--ar:1918/944;--w:640px" data-video="assets/videos/static/ISHA.mp4" tabindex="0">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/static/ISHA.png" alt="ISHA" loading="lazy"><video muted loop playsinline preload="metadata" poster="assets/images/static/ISHA.png"><source src="assets/videos/static/ISHA.mp4" type="video/mp4"></video><span class="plb"><i class="fa fa-play"></i></span></div></div>
+          <div class="pm"><h4>ISHA</h4><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+        <article class="pc t3 done" data-tilt="3" style="--ar:1918/944;--w:640px" data-video="assets/videos/dynamic/Equipride.mp4" tabindex="0">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/dynamic/Equipride.png" alt="Equipride" loading="lazy"><video muted loop playsinline preload="metadata" poster="assets/images/dynamic/Equipride.png"><source src="assets/videos/dynamic/Equipride.mp4" type="video/mp4"></video><span class="plb"><i class="fa fa-play"></i></span></div></div>
+          <div class="pm"><h4>Equipride</h4><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="pf">
+      <div class="pfh rv"><span class="pfi"><i class="fa fa-users"></i></span><h3>CRM Web Portal</h3><span class="pfc">1 project</span>
+        <div class="rbtns"><button class="rbtn rprev" type="button" aria-label="Previous"><i class="fa fa-angle-left"></i></button><button class="rbtn rnext" type="button" aria-label="Next"><i class="fa fa-angle-right"></i></button></div>
+      </div>
+      <div class="rtrack rv">
+        <article class="pc t3 done" data-tilt="3" style="--ar:392/380;--w:400px">
+          <div class="bw"><div class="bb"><i></i><i></i><i></i></div>
+          <div class="bs"><img src="assets/images/case/5.jpg" alt="CRM web portal project" loading="lazy"></div></div>
+          <div class="pm"><div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>javascript</span><span>Jquery</span><span>PHP</span></div></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
-  <!--====== Bootstrap js ======-->
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
+<!--====== VIDEO POPUP ======-->
+<div class="vm" id="vm" role="dialog" aria-modal="true" aria-label="Project video">
+  <div class="vmb">
+    <button class="vmx" id="vmx" aria-label="Close"><i class="fa fa-times"></i></button>
+    <video id="mv" controls playsinline></video>
+  </div>
+</div>
 
-  <!--====== Ajax Contact js ======-->
-  <script src="assets/js/ajax-contact.js"></script>
 
-  <!--====== wow.min js ======-->
-  <script src="assets/js/wow.min.js"></script>
+<!--====== FOOTER ======-->
+<footer>
+  <div class="wrap fg">
+    <div><img src="assets/images/normal/162x55.png" alt="Logo"></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="potfolio.html">Portfolio</a></li>
+      <li><a href="contact.php">Contact</a></li>
+    </ul>
+    <ul class="ad">
+      <li><i class="flaticon-phone-call"></i><p>+91 96007 12716</p></li>
+      <li><i class="flaticon-placeholder"></i><div><p>Ettani</p><p>Karungal, 629157</p><p>kanyakumari, Tamilnadu</p></div></li>
+      <li><i class="flaticon-email"></i><p>info@scratchsoftwaresolutions.com</p></li>
+    </ul>
+    <div>
+      <p>Contact us today to embark on an exciting journey of digital transformation. to life</p>
+      <div class="sci">
+        <a href="https://www.facebook.com/people/Scratch-Software-Solutions/100094091524895/?mibextid=ZbWKwL" target="_blank" rel="noopener" aria-label="Facebook"><i class="flaticon-facebook-circular-logo"></i></a>
+        <a href="https://instagram.com/scratchsoftwaresolutions?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D" target="_blank" rel="noopener" aria-label="Instagram"><i class="flaticon-instagram"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa fa-linkedin-square"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="copyr">
+    <p>All copyrights reserved © 2023 - Designed &amp; Developed by <a href="https://scratchsoftwaresolutions.com/">Scratch Software Solutions</a></p>
+  </div>
+</footer>
 
-  <!--====== Main js ======-->
-  <script src="assets/js/main.js"></script>
-  <script type="text/javascript">
-    // preloader
-    $(window).on("load", function (event) {
-      $(".gridtemplate-loader").delay(500).fadeOut(500);
-    });
-  </script>
-  <script>
-  document.querySelectorAll('.video-hover').forEach(function (card) {
-    var video = card.querySelector('.hover-video');
-
-    card.addEventListener('mouseenter', function () {
-      card.classList.add('playing');
-      var p = video.play();
-      if (p !== undefined) p.catch(function () {});
-    });
-
-    card.addEventListener('mouseleave', function () {
-      card.classList.remove('playing');
-      video.pause();
-      video.currentTime = 0;
-    });
-  });
-</script>
+<a href="#" class="top" aria-label="Back to top"><i class="flaticon-up-arrow"></i></a>
 
 <script>
-  window.addEventListener('load', function () {
-    document.querySelectorAll('.hover-video').forEach(function (v) {
-      v.preload = 'auto';
-      v.load();
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))};
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mx=0,my=0;
+
+  /* preloader */
+  var pre=$('.pre'),hide=function(){pre.classList.add('off')};
+  addEventListener('load',function(){setTimeout(hide,400)});setTimeout(hide,3000);
+
+  /* mobile menu */
+  var bg=$('.burger'),bi=bg.querySelector('i');
+  function setMenu(o){
+    document.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o);bi.className=o?'fa fa-times':'fa fa-bars';
+    if(!o)$$('.has.open').forEach(function(h){h.classList.remove('open')});
+  }
+  bg.onclick=function(){setMenu(!document.body.classList.contains('menu-open'))};
+  addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  addEventListener('resize',function(){if(innerWidth>1000)setMenu(false)});
+  /* tap About Us / Services to open or close its list */
+  $$('.has>a').forEach(function(a){a.addEventListener('click',function(e){if(innerWidth<=1000){e.preventDefault();a.parentNode.classList.toggle('open')}})});
+  /* any other link closes the menu */
+  $$('.menu a').forEach(function(a){a.addEventListener('click',function(){if(!a.parentNode.classList.contains('has'))setMenu(false)})});
+
+  /* section title letters */
+  $$('.st h3').forEach(function(h){
+    var t=h.textContent;h.setAttribute('aria-label',t);h.textContent='';var k=0;
+    t.split(' ').forEach(function(w,wi,a){
+      var s=document.createElement('span');s.style.cssText='display:inline-block;white-space:nowrap';s.setAttribute('aria-hidden','true');
+      w.split('').forEach(function(c){var x=document.createElement('span');x.className='ch';x.textContent=c;x.style.transitionDelay=(k++*.045)+'s';s.appendChild(x)});
+      h.appendChild(s);if(wi<a.length-1)h.appendChild(document.createTextNode(' '));
     });
   });
-</script>
 
-<script>
-  (function () {
-    var modal = document.getElementById('videoModal');
-    var modalVideo = document.getElementById('modalVideo');
+  /* scroll reveal */
+  function doneLater(el){setTimeout(function(){el.style.transitionDelay='';el.classList.add('done')},1500)}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');io.unobserve(el);
+      if(el.classList.contains('t3'))doneLater(el);
+    })},{threshold:.15,rootMargin:'0px 0px -50px 0px'});
+    $$('.rv,.st,.fd').forEach(function(el){io.observe(el)});
+  }else{$$('.rv,.st,.fd').forEach(function(el){el.classList.add('in','done')})}
 
-    document.querySelectorAll('.video-hover').forEach(function (card) {
-      card.addEventListener('click', function (e) {
-        e.preventDefault();                       // stops the jump to top
-        modalVideo.src = card.getAttribute('data-video');
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';  // page doesn't scroll behind
-        var p = modalVideo.play();
-        if (p !== undefined) p.catch(function () {});
-      });
+  /* portfolio: hover previews the video, click opens it large, rails slide sideways */
+  var vm=$('#vm'),mv=$('#mv');
+  $$('.pc[data-video]').forEach(function(card){
+    var v=card.querySelector('video');
+    card.addEventListener('mouseenter',function(){
+      if(rm||!matchMedia('(hover:hover)').matches)return;
+      v.preload='auto';card.classList.add('playing');var p=v.play();if(p&&p.catch)p.catch(function(){});
     });
-
-    function closeModal() {
-      modal.classList.remove('open');
-      modalVideo.pause();
-      modalVideo.removeAttribute('src');
-      modalVideo.load();
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('videoModalClose').addEventListener('click', closeModal);
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal();       // click on dark area closes
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
-    });
-  })();
-</script>
-
-<script>
-  document.querySelectorAll('.static-carousel').forEach(function (carousel) {
-    var track = carousel.querySelector('.sc-track');
-    var prev = carousel.querySelector('.sc-prev');
-    var next = carousel.querySelector('.sc-next');
-
-    prev.addEventListener('click', function () {
-      track.scrollBy({ left: -track.clientWidth * 0.7, behavior: 'smooth' });
-    });
-    next.addEventListener('click', function () {
-      track.scrollBy({ left: track.clientWidth * 0.7, behavior: 'smooth' });
-    });
-
-    // Show arrows only when the cards overflow the track
-    function updateArrows() {
-      var needsScroll = track.scrollWidth > track.clientWidth + 1;
-      prev.style.display = needsScroll ? '' : 'none';
-      next.style.display = needsScroll ? '' : 'none';
-    }
-
-    updateArrows();
-    window.addEventListener('resize', updateArrows);
-    window.addEventListener('load', updateArrows);
+    card.addEventListener('mouseleave',function(){card.classList.remove('playing');v.pause();v.currentTime=0});
+    function open(){mv.src=card.getAttribute('data-video');vm.classList.add('open');document.body.style.overflow='hidden';var p=mv.play();if(p&&p.catch)p.catch(function(){})}
+    card.addEventListener('click',function(e){e.preventDefault();open()});
+    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
   });
+  function closeVm(){vm.classList.remove('open');mv.pause();mv.removeAttribute('src');mv.load();document.body.style.overflow=''}
+  $('#vmx').onclick=closeVm;
+  vm.addEventListener('click',function(e){if(e.target===vm)closeVm()});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&vm.classList.contains('open'))closeVm()});
+  $$('.pf').forEach(function(g){
+    var tr=g.querySelector('.rtrack'),pv=g.querySelector('.rprev'),nx=g.querySelector('.rnext'),bt=g.querySelector('.rbtns');
+    pv.onclick=function(){tr.scrollBy({left:-tr.clientWidth*.7,behavior:'smooth'})};
+    nx.onclick=function(){tr.scrollBy({left:tr.clientWidth*.7,behavior:'smooth'})};
+    function upd(){bt.style.display=tr.scrollWidth>tr.clientWidth+1?'':'none'}
+    upd();addEventListener('resize',upd);addEventListener('load',upd);
+  });
+
+  /* tilt following the mouse */  /* tilt following the mouse */
+  if(!rm)$$('[data-tilt]').forEach(function(el){
+    var m=+el.dataset.tilt;
+    el.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'&&el.classList.contains('done'))el.classList.add('tl')});
+    el.addEventListener('pointermove',function(e){
+      if(e.pointerType!=='mouse'||!el.classList.contains('tl'))return;
+      var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      el.style.setProperty('--ry',(x*m*2).toFixed(2)+'deg');el.style.setProperty('--rx',(-y*m*2).toFixed(2)+'deg');
+    });
+    el.addEventListener('pointerleave',function(){el.classList.remove('tl');el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')});
+  });
+
+  /* scroll + mouse driven frame */
+  var pg=$('#pg'),top=$('.top'),hd=$('.hd'),tilt=$('#tilt'),hbg=$('#hbg'),tk=false;
+  function tick(){
+    tk=false;var y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+    pg.style.transform='scaleX('+(max>0?y/max:0)+')';
+    hd.classList.toggle('sc',y>40);top.classList.toggle('show',y>700);
+    if(!rm&&y<innerHeight*1.2)hbg.style.setProperty('--sy',(y*.2).toFixed(1)+'px');
+  }
+  function req(){if(!tk){tk=true;requestAnimationFrame(tick)}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);tick();
+
+  addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;
+    if(rm)return;
+    tilt.style.setProperty('--ry',(mx*10).toFixed(2)+'deg');tilt.style.setProperty('--rx',(-my*6).toFixed(2)+'deg');
+    hbg.style.setProperty('--bx',(-mx*26).toFixed(1)+'px');hbg.style.setProperty('--by',(-my*16).toFixed(1)+'px');
+  });
+
+  /* custom cursor */
+  var cu=$('#cur');
+  if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var tx=0,ty=0,cx=0,cy=0;
+    addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY});
+    document.addEventListener('mouseover',function(e){cu.classList.toggle('big',!!e.target.closest('a,button,input,select,textarea,.pc[data-video]'))});
+    (function loop(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cu.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
+  }
+})();
 </script>
 </body>
-
 </html>
